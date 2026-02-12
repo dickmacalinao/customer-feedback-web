@@ -1,3 +1,11 @@
+import TextField from "./common/TextField";
+import Switch from "./common/Switch";
+import Choices from "./common/Choices";
+import MultipleChoices from "./common/MultipleChoices";
+import TextArea from "./common/TextArea";
+import Dropdown from "./common/Dropdown";
+import SubmitButton from "./common/SubmitButton";
+
 export default function FeedbackList() {
   return (
     <>
@@ -9,101 +17,58 @@ export default function FeedbackList() {
         </p>
 
         <form>
-          // Name
-          <div className="form-group">
-            <label for="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
-          // Email
-          <div className="form-group">
-            <label for="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          // Satisfaction Level
-          <div className="form-group">
-            <label>How satisfied are you with our service?</label>
-            <div className="radio-group">
-              <label>
-                <input type="radio" name="satisfaction" required /> Very
-                Satisfied
-              </label>
-              <label>
-                <input type="radio" name="satisfaction" /> Satisfied
-              </label>
-              <label>
-                <input type="radio" name="satisfaction" /> Neutral
-              </label>
-              <label>
-                <input type="radio" name="satisfaction" /> Unsatisfied
-              </label>
-              <label>
-                <input type="radio" name="satisfaction" /> Very Unsatisfied
-              </label>
-            </div>
-          </div>
-          // Recommendation
-          <div className="form-group">
-            <label>Would you recommend our company to others?</label>
-            <div className="radio-group">
-              <label>
-                <input type="radio" name="recommend" required /> Yes
-              </label>
-              <label>
-                <input type="radio" name="recommend" /> No
-              </label>
-            </div>
-          </div>
-          // Services Used
-          <div className="form-group">
-            <label>Which of our services have you used?</label>
-            <div className="checkbox-group">
-              <label>
-                <input type="checkbox" /> Customer Support
-              </label>
-              <label>
-                <input type="checkbox" /> Online Ordering
-              </label>
-              <label>
-                <input type="checkbox" /> Delivery Service
-              </label>
-              <label>
-                <input type="checkbox" /> Technical Assistance
-              </label>
-            </div>
-          </div>
-          // Improvement
-          <div className="form-group">
-            <label for="improve">What can we improve?</label>
-            <textarea
-              id="improve"
-              placeholder="Share your suggestions..."
-            ></textarea>
-          </div>
-          // Overall Rating
-          <div className="form-group">
-            <label for="rating">Overall Rating</label>
-            <select id="rating" required>
-              <option value="">Select rating</option>
-              <option>5 - Excellent</option>
-              <option>4 - Good</option>
-              <option>3 - Average</option>
-              <option>2 - Poor</option>
-              <option>1 - Very Poor</option>
-            </select>
-          </div>
-          <button type="submit" className="btn-submit">
-            Submit Feedback
-          </button>
+          <TextField
+            name="fullName"
+            label="Full Name"
+            description="Enter your full name"
+          />
+          <TextField
+            name="email"
+            label="Email"
+            description="Enter your email"
+          />
+          <Choices
+            name="satisfaction"
+            label="How satisfied are you with our service?"
+            choices={[
+              "Very Satisfied",
+              "Satisfied",
+              "Neutral",
+              "Unsatisfied",
+              "Very Unsatisfied",
+            ]}
+          />
+          <Switch
+            name="recommend"
+            label="Would you recommend our company to others?"
+          />
+          <MultipleChoices
+            name="satisfaction"
+            label="Which of our services have you used?"
+            choices={[
+              "Customer Support",
+              "Online Ordering",
+              "Delivery Service",
+              "Technical Assistance",
+            ]}
+          />
+          <TextArea
+            name="improve"
+            label="What can we improve?"
+            placeholder="Share your suggestions..."
+          />
+          <Dropdown
+            name="rating"
+            label="Overall Rating"
+            options={[
+              { id: 5, value: "5 - Excellent" },
+              { id: 4, value: "4 - Good" },
+              { id: 3, value: "3 - Average" },
+              { id: 2, value: "2 - Poor" },
+              { id: 1, value: "1 - Very Poor" },
+            ]}
+          />
+          <SubmitButton label="Submit Feedback" />
         </form>
       </div>
     </>

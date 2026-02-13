@@ -74,6 +74,20 @@ export default defineConfig([
 ])
 ```
 
+# Git Command
+git init
+git branch -M main
+git remote add origin https://github.com/dickmacalinao/customer-feedback-web.git
+git remote -v
+
+git diff
+git add .
+git status
+git commit -m "comment"
+git push -u origin main
+
+
+
 # Step-by-Step Fix (Clean Reinstall)
 # 1️⃣ Remove dependencies
 rm -rf node_modules

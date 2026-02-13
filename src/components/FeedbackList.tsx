@@ -27,6 +27,7 @@ export default function FeedbackList() {
             label="Email"
             description="Enter your email"
           />
+
           <Choices
             name="satisfaction"
             label="How satisfied are you with our service?"
@@ -57,6 +58,7 @@ export default function FeedbackList() {
             label="What can we improve?"
             placeholder="Share your suggestions..."
           />
+
           <Dropdown
             name="rating"
             label="Overall Rating"

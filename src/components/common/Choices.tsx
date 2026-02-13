@@ -1,4 +1,14 @@
-export default function Choices({ name, label, choices }) {
+type ChoicesProps = {
+  name?: string;
+  label?: string;
+  choices?: string[];
+};
+
+export default function Choices({
+  name = "",
+  label = "",
+  choices = [],
+}: ChoicesProps) {
   const listItems = choices.map((choice, index) => (
     <label>
       <input type="radio" name={name} required={index === 0} />

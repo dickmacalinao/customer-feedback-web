@@ -73,3 +73,32 @@ export default defineConfig([
   },
 ])
 ```
+
+# Step-by-Step Fix (Clean Reinstall)
+# 1️⃣ Remove dependencies
+rm -rf node_modules
+# 2️⃣ Remove lock file
+rm -f package-lock.json
+# 3️⃣ Clear npm cache (important)
+npm cache clean --force
+# 4️⃣ Reinstall
+npm install
+
+# Production Docker Setup (Multi-Stage Build)
+# Build Docker Image
+docker build -t customer-feedback-web .
+# Run the Container
+docker run -p 3000:80 customer-feedback-web
+
+# Development Docker Setup (Hot Reload)
+docker build -f Dockerfile.dev -t customer-feedback-web .
+docker run -p 5173:5173 -v $(pwd):/app customer-feedback-web
+
+# Docker Compose (Professional Setup)
+# docker-compose up --build
+# docker compose build --no-cache
+
+
+docker build -t customer-feedback-web --build-arg VITE_API_URL=https://customer-feedback-web.com .
+docker run -p 3000:80 customer-feedback-web
+

@@ -1,4 +1,14 @@
-export default function MultipleChoices({ label = "", choices = [] }) {
+type MultipleChoicesProps = {
+  name?: string;
+  label?: string;
+  choices?: string[];
+};
+
+export default function MultipleChoices({
+  name = "",
+  label = "",
+  choices = [],
+}: MultipleChoicesProps) {
   const listItems = choices.map((choice) => (
     <label>
       <input type="checkbox" />
@@ -8,7 +18,7 @@ export default function MultipleChoices({ label = "", choices = [] }) {
   return (
     <>
       <div className="form-group">
-        <label>{label}</label>
+        <label htmlFor={name}>{label}</label>
         <div className="checkbox-group">{listItems}</div>
       </div>
     </>

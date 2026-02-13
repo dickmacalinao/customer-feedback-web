@@ -105,14 +105,13 @@ docker build -t customer-feedback-web .
 docker run -p 3000:80 customer-feedback-web
 
 # Development Docker Setup (Hot Reload)
-docker build -f Dockerfile.dev -t customer-feedback-web .
-docker run -p 5173:5173 -v $(pwd):/app customer-feedback-web
+# docker build -f Dockerfile.dev -t customer-feedback-web .
+# docker run -p 3000:3000 -v $(pwd):/app customer-feedback-web
 
 # Docker Compose (Professional Setup)
-# docker-compose up --build
-# docker compose build --no-cache
+docker-compose build --no-cache
+docker-compose up --build
 
-
-docker build -t customer-feedback-web --build-arg VITE_API_URL=https://customer-feedback-web.com .
-docker run -p 3000:80 customer-feedback-web
+# docker build -t customer-feedback-web --build-arg VITE_API_URL=https://customer-feedback-web.com .
+# docker run -p 3000:80 customer-feedback-web
 

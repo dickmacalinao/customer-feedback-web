@@ -2,7 +2,7 @@
 import "./App.css";
 import Header from "./components/common/Header.tsx";
 import Footer from "./components/common/Footer.tsx";
-import FeedbackList from "./components/FeedbackList.tsx";
+import FeedbackList from "./pages/FeedbackList.tsx";
 
 export default function App() {
   // const [count, setCount] = useState(0);

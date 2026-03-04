@@ -24,7 +24,7 @@ export default function Dropdown({
     <>
       <div className="form-group">
         <label htmlFor={name}>{label}</label>
-        <select id={name} required>
+        <select id={name} required onChange={() => alert("Test")}>
           {nullable && <option value="">Select rating</option>}
           {listOptions}
         </select>

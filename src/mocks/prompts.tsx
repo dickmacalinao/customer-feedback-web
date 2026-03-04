@@ -1,0 +1,1 @@
+// Generate a list of customer feedback categories and questions for a {store type} with minimum of 5 and maximum of 8 questions per category. The questions must be professional in tone with the intention to get the customer's feedback to the products and/or services provided.

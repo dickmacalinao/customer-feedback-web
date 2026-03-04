@@ -1,12 +1,30 @@
-import TextField from "./common/TextField";
-import Switch from "./common/Switch";
-import Choices from "./common/Choices";
-import MultipleChoices from "./common/MultipleChoices";
-import TextArea from "./common/TextArea";
-import Dropdown from "./common/Dropdown";
-import SubmitButton from "./common/SubmitButton";
+import { useState, useEffect, useEffectEvent } from "react";
+
+import TextField from "../components/common/TextField";
+import Switch from "../components/common/Switch";
+import Choices from "../components/common/Choices";
+import MultipleChoices from "../components/common/MultipleChoices";
+import TextArea from "../components/common/TextArea";
+import Dropdown from "../components/common/Dropdown";
+import SubmitButton from "../components/common/SubmitButton";
+import { type QuestionCategotyType, staticQuestonCategories } from "../mocks/questions";
 
 export default function FeedbackList() {
+  const [quetionCategories, setQuestionCategories] = useState<QuestionCategotyType[]>([]);
+
+  const getQuestions = useEffectEvent(() => {
+    //TODO: This should be fetch from API
+    setQuestionCategories(staticQuestonCategories);
+  });
+
+  useEffect(() => {
+    console.log("Start synchronization");
+    getQuestions();
+    return () => {
+      console.log("Stop synchronization");
+    };
+  }, []);
+
   return (
     <>
       <div className="container">
@@ -16,6 +34,11 @@ export default function FeedbackList() {
           us improve our services.
         </p>
 
+        <ul>
+          {quetionCategories.map((quetionCategory) => (
+            <li>{quetionCategory?.category}</li>
+          ))}
+        </ul>
         <form>
           <TextField
             name="fullName"

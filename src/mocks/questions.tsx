@@ -1,42 +1,39 @@
-export type QuestionCategotyType = {
-  category: string;
-  questions: QuestionType[];
-};
-
-type QuestionType = {
-  type: string;
-  question: string;
-};
-
 export const staticQuestonCategories = [
   {
+    id: 1,
     category: "Product Quality (Food & Beverages)",
     questions: [
       {
+        id: 1,
         type: "rate",
         question:
           "How would you rate the overall quality of the food and beverages you ordered today?",
       },
       {
+        id: 2,
         type: "yesNo",
         question:
           "Were the flavors, freshness, and presentation of your items satisfactory?",
       },
       {
+        id: 3,
         type: "yesNo",
         question:
           "Did your order meet your expectations based on the menu description?",
       },
       {
+        id: 4,
         type: "rate",
         question:
           "How satisfied were you with the temperature and consistency of your beverage?",
       },
       {
+        id: 5,
         type: "yesNo",
         question: "Were portion sizes appropriate for the price paid?",
       },
       {
+        id: 6,
         type: "text",
         question:
           "Is there any specific item you particularly enjoyed or believe could be improved?",
@@ -44,34 +41,41 @@ export const staticQuestonCategories = [
     ],
   },
   {
+    id: 2,
     category: "Customer Service",
     questions: [
       {
+        id: 7,
         type: "rate",
         question:
           "How would you rate the friendliness and professionalism of our staff?",
       },
       {
+        id: 8,
         type: "yesNo",
         question:
           "Did our team respond promptly to your questions or requests?",
       },
       {
+        id: 9,
         type: "yesNo",
         question:
           "Were you greeted and acknowledged in a timely manner upon arrival?",
       },
       {
+        id: 10,
         type: "yesNo",
         question:
           "Did the staff demonstrate good product knowledge when assisting you?",
       },
       {
+        id: 11,
         type: "rate",
         question:
           "How satisfied are you with the overall attentiveness of our service team?",
       },
       {
+        id: 12,
         type: "text",
         question:
           "Is there anything our staff could do to improve your experience?",

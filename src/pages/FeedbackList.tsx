@@ -1,16 +1,21 @@
 import { useState, useEffect, useEffectEvent } from "react";
 
-import TextField from "../components/common/TextField";
-import Switch from "../components/common/Switch";
-import Choices from "../components/common/Choices";
-import MultipleChoices from "../components/common/MultipleChoices";
-import TextArea from "../components/common/TextArea";
-import Dropdown from "../components/common/Dropdown";
+// import TextField from "../components/common/TextField";
+// import Switch from "../components/common/Switch";
+// import Choices from "../components/common/Choices";
+// import MultipleChoices from "../components/common/MultipleChoices";
+// import TextArea from "../components/common/TextArea";
+// import Dropdown from "../components/common/Dropdown";
 import SubmitButton from "../components/common/SubmitButton";
-import { type QuestionCategotyType, staticQuestonCategories } from "../mocks/questions";
+import { type QuestionCategoryType } from "../types/CommonTypes";
+import { staticQuestonCategories } from "../mocks/questions";
+
+import Category from "./Category";
 
 export default function FeedbackList() {
-  const [quetionCategories, setQuestionCategories] = useState<QuestionCategotyType[]>([]);
+  const [quetionCategories, setQuestionCategories] = useState<
+    QuestionCategoryType[]
+  >([]);
 
   const getQuestions = useEffectEvent(() => {
     //TODO: This should be fetch from API
@@ -34,12 +39,12 @@ export default function FeedbackList() {
           us improve our services.
         </p>
 
-        <ul>
-          {quetionCategories.map((quetionCategory) => (
-            <li>{quetionCategory?.category}</li>
-          ))}
-        </ul>
         <form>
+          {quetionCategories.map((category) => (
+            <Category category={category} />
+          ))}
+
+          {/*
           <TextField
             name="fullName"
             label="Full Name"
@@ -82,6 +87,7 @@ export default function FeedbackList() {
             placeholder="Share your suggestions..."
           />
 
+          
           <Dropdown
             name="rating"
             label="Overall Rating"
@@ -92,7 +98,7 @@ export default function FeedbackList() {
               { id: 2, value: "2 - Poor" },
               { id: 1, value: "1 - Very Poor" },
             ]}
-          />
+          />*/}
           <SubmitButton label="Submit Feedback" />
         </form>
       </div>

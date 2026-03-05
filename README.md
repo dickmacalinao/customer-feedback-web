@@ -74,7 +74,7 @@ export default defineConfig([
 ])
 ```
 
-# Git Command
+# Git Commands
 git init
 git branch -M main
 git remote add origin https://github.com/dickmacalinao/customer-feedback-web.git
@@ -85,7 +85,6 @@ git add .
 git status
 git commit -m "comment"
 git push -u origin main
-
 
 
 # Step-by-Step Fix (Clean Reinstall)

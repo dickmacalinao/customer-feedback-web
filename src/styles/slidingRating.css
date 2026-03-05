@@ -1,0 +1,42 @@
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:30px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-group{
+  margin-bottom:30px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.slider-container{
+  /*display:flex;*/
+  align-items:center;
+  gap:15px;
+}
+
+.rating-value{
+  font-size:18px;
+  font-weight:bold;
+  width:30px;
+  text-align:center;
+}
+
+input[type="range"]{
+  width:100%;
+}
+
+.rating-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  color:#555;
+}

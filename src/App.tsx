@@ -2,15 +2,13 @@
 import "./App.css";
 import Header from "./components/common/Header.tsx";
 import Footer from "./components/common/Footer.tsx";
-import FeedbackList from "./pages/FeedbackList.tsx";
+import AppPage from "./pages/AppPage.tsx";
 
 export default function App() {
-  // const [count, setCount] = useState(0);
-
   return (
     <>
       <Header />
-      <FeedbackList />
+      <AppPage />
       <Footer />
     </>
   );

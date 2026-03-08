@@ -16,7 +16,7 @@ export default function Category({ category }: QuestionCategoryTypeProps) {
     <>
       <h2>{category.category}</h2>
       {category.questions.map((question) => (
-        <Question question={question} />
+        <Question key={question.id} question={question} />
       ))}
     </>
   );

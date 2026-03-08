@@ -1,19 +1,31 @@
 import React, { useState } from "react";
-import { type RatingProps } from "../../types/PropTypes";
 
-const SlideRating: React.FC<RatingProps> = ({
+type SlideRatingProps = {
+  id: string;
+  label: string;
+  min?: number;
+  max?: number;
+  defaultValue?: number;
+  value?: number;
+  onChange?: (value: number) => void;
+};
+
+const SlideRating: React.FC<SlideRatingProps> = ({
   id,
   label,
   min = 1,
   max = 10,
   defaultValue = 5,
+  value,
   onChange,
 }) => {
-  const [value, setValue] = useState<number>(defaultValue);
+  const [selectedValue, setSelectedValue] = useState<number>(
+    value ?? defaultValue
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rating = Number(e.target.value);
-    setValue(rating);
+    setSelectedValue(rating);
 
     if (onChange) {
       onChange(rating);
@@ -30,7 +42,7 @@ const SlideRating: React.FC<RatingProps> = ({
           id={id}
           min={min}
           max={max}
-          value={value}
+          value={selectedValue}
           onChange={handleChange}
         />
       </div>

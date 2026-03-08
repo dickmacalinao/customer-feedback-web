@@ -9,6 +9,7 @@ import { useState, useEffect, useEffectEvent } from "react";
 import SubmitButton from "../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../types/CommonTypes";
 import { staticQuestonCategories } from "../mocks/questions";
+import { useFeedback } from "../context/FeedbackContext";
 
 import Category from "./Category";
 
@@ -16,6 +17,7 @@ export default function FeedbackList() {
   const [quetionCategories, setQuestionCategories] = useState<
     QuestionCategoryType[]
   >([]);
+  const feedback = useFeedback();
 
   const getQuestions = useEffectEvent(() => {
     //TODO: This should be fetch from API
@@ -30,6 +32,11 @@ export default function FeedbackList() {
     };
   }, []);
 
+  function submitHandler() {
+    // e.preventDefault();
+    console.log("Submit", feedback);
+  }
+
   return (
     <>
       <div className="container">
@@ -41,7 +48,7 @@ export default function FeedbackList() {
 
         <form>
           {quetionCategories.map((category) => (
-            <Category category={category} />
+            <Category category={category} key={category.id} />
           ))}
 
           {/*
@@ -99,7 +106,7 @@ export default function FeedbackList() {
               { id: 1, value: "1 - Very Poor" },
             ]}
           />*/}
-          <SubmitButton label="Submit Feedback" />
+          <SubmitButton label="Submit Feedback" onSubmit={submitHandler} />
         </form>
       </div>
     </>

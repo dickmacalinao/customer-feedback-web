@@ -5,7 +5,7 @@ export const staticQuestonCategories = [
     questions: [
       {
         id: 1,
-        type: "rate",
+        type: "slidingRate",
         question:
           "How would you rate the overall quality of the food and beverages you ordered today?",
       },
@@ -23,7 +23,7 @@ export const staticQuestonCategories = [
       },
       {
         id: 4,
-        type: "rate",
+        type: "slidingRate",
         question:
           "How satisfied were you with the temperature and consistency of your beverage?",
       },
@@ -37,6 +37,7 @@ export const staticQuestonCategories = [
         type: "text",
         question:
           "Is there any specific item you particularly enjoyed or believe could be improved?",
+        required: true,
       },
     ],
   },
@@ -46,7 +47,7 @@ export const staticQuestonCategories = [
     questions: [
       {
         id: 7,
-        type: "rate",
+        type: "slidingRate",
         question:
           "How would you rate the friendliness and professionalism of our staff?",
       },
@@ -70,7 +71,7 @@ export const staticQuestonCategories = [
       },
       {
         id: 11,
-        type: "rate",
+        type: "slidingRate",
         question:
           "How satisfied are you with the overall attentiveness of our service team?",
       },
@@ -87,7 +88,7 @@ export const staticQuestonCategories = [
     category: "Cleanliness & Ambience",
     questions: [
       {
-        type: "rate",
+        type: "slidingRate",
         question: "How would you rate the cleanliness of the dining area?",
       },
       {
@@ -96,7 +97,7 @@ export const staticQuestonCategories = [
           "Were the tables, restrooms, and service counters well maintained?",
       },
       {
-        type: "rate",
+        type: "slidingRate",
         question:
           "How comfortable was the seating and overall layout of the café?",
       },
@@ -106,7 +107,7 @@ export const staticQuestonCategories = [
           "Did the atmosphere (lighting, music, décor) enhance your experience?",
       },
       {
-        type: "rate",
+        type: "slidingRate",
         question:
           "How satisfied were you with the noise level inside the café?",
       },
@@ -121,7 +122,7 @@ export const staticQuestonCategories = [
     category: "Speed & Efficiency",
     questions: [
       {
-        type: "rate",
+        type: "slidingRate",
         question:
           "How satisfied were you with the waiting time for your order?",
       },
@@ -134,7 +135,7 @@ export const staticQuestonCategories = [
         question: "Did you experience any delays during your visit?",
       },
       {
-        type: "rate",
+        type: "slidingRate",
         question: "How would you rate the accuracy of your order?",
       },
       {
@@ -151,7 +152,7 @@ export const staticQuestonCategories = [
     category: "Pricing & Value for Money",
     questions: [
       {
-        type: "rate",
+        type: "slidingRate",
         question: "How would you rate the value for money of your purchase?",
       },
       {
@@ -182,11 +183,11 @@ export const staticQuestonCategories = [
     category: "Overall Experience & Loyalty",
     questions: [
       {
-        type: "rate",
+        type: "slidingRate",
         question: "Overall, how satisfied are you with your visit today?",
       },
       {
-        type: "rate",
+        type: "slidingRate",
         question:
           "How likely are you to recommend our café to friends or colleagues?",
       },
@@ -195,7 +196,7 @@ export const staticQuestonCategories = [
         type: "text",
         question: "Was there anything that did not meet your expectations?",
       },
-      { type: "rate", question: "How likely are you to return in the future?" },
+      { type: "slidingRate", question: "How likely are you to return in the future?" },
       {
         type: "text",
         question:

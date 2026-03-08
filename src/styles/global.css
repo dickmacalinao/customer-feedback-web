@@ -75,6 +75,9 @@ p.description {
   text-align: center;
   color: #6c757d;
   margin-bottom: 30px;
+  &.completed {
+    font-weight: bold;
+  }
 }
 
 .form-group {

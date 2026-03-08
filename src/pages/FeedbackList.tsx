@@ -19,6 +19,7 @@ export default function FeedbackList() {
     QuestionCategoryType[]
   >([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [completed, setCompleted] = useState(false);
 
   const feedback = useFeedback();
 
@@ -40,7 +41,11 @@ export default function FeedbackList() {
 
   const updateCurrentPage = useEffectEvent(() => {
     if (feedback && feedback.length > 0) {
-      setCurrentPage(currentPage + 1);
+      if (currentPage + 1 === questionCategories.length) {
+        setCompleted(true);
+      } else {
+        setCurrentPage(currentPage + 1);
+      }
     }
   });
 
@@ -63,22 +68,28 @@ export default function FeedbackList() {
     <>
       <div className="container">
         <h1>Customer Feedback</h1>
-        <p className="description">
-          We value your feedback. Please answer the following questions to help
-          us improve our services.
-        </p>
+        {!completed && (
+          <p className="description">
+            We value your feedback. Please answer the following questions to
+            help us improve our services.
+          </p>
+        )}
+        {completed && (
+          <p className="description completed">Thank you for your feedback!</p>
+        )}
 
-        <form>
-          {questionCategories && questionCategories[currentPage] && (
-            <Category
-              category={questionCategories[currentPage]}
-              key={questionCategories[currentPage]?.id}
-            />
-          )}
+        {!completed && (
+          <form>
+            {questionCategories && questionCategories[currentPage] && (
+              <Category
+                category={questionCategories[currentPage]}
+                key={questionCategories[currentPage]?.id}
+              />
+            )}
 
-          {JSON.stringify(feedback)}
+            {JSON.stringify(feedback)}
 
-          {/*
+            {/*
           <Choices
             name="satisfaction"
             label="How satisfied are you with our service?"
@@ -112,18 +123,19 @@ export default function FeedbackList() {
             ]}
           />
           */}
-          <label className="category-pages">
-            {currentPage + 1} of {questionCategories.length}
-          </label>
-          <SubmitButton
-            label={
-              currentPage + 1 === questionCategories.length
-                ? "Submit Feedback"
-                : "Continue >>>"
-            }
-            onSubmit={submitHandler}
-          />
-        </form>
+            <label className="category-pages">
+              {currentPage + 1} of {questionCategories.length}
+            </label>
+            <SubmitButton
+              label={
+                currentPage + 1 === questionCategories.length
+                  ? "Submit Feedback"
+                  : "Continue >>>"
+              }
+              onSubmit={submitHandler}
+            />
+          </form>
+        )}
       </div>
     </>
   );

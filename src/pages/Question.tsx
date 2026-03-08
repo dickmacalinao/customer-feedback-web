@@ -4,32 +4,35 @@ import Switch from "../components/common/Switch";
 import TextField from "../components/common/TextField";
 import SlideRating from "../components/common/SlideRating";
 import { useFeedback, useFeedbackDispatch } from "../context/FeedbackContext";
+import { useValidation } from "../context/FormValidationContext";
 
 type QuestionTypeProps = {
   question: QuestionType;
 };
 
-export default function Question({
-  question,
-}: QuestionTypeProps) {
+export default function Question({ question }: QuestionTypeProps) {
   const feedback = useFeedback();
   const dispatch = useFeedbackDispatch();
 
+  const validations = useValidation();
+
   const feedbackAnswer = feedback.find((f) => f.qId === question.id);
-  // console.log("feedbackAnswer", feedbackAnswer);
-  // const feedbackAnswer = { value: "yes" };
-  console.log(question, feedbackAnswer);
+  const errors = validations
+    .filter((v) => v.qId === question.id)
+    .map((v) => {
+      return v.errorMessage;
+    });
+  // console.log(question, feedbackAnswer, errors);
 
   return (
     <>
-      // Text Field question
       {question.type === "text" && (
         <TextField
           name={question.question}
           label={question.question}
           description="Enter your answer"
           value={feedbackAnswer?.value}
-          required={question.required}
+          errors={errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
@@ -39,12 +42,12 @@ export default function Question({
           }}
         />
       )}
-      // Yes-No switch question
       {question.type === "yesNo" && (
         <Switch
           name={question.question}
           label={question.question}
           value={feedbackAnswer?.value}
+          errors={errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
@@ -54,12 +57,12 @@ export default function Question({
           }}
         />
       )}
-      // Sliding Rate question
       {question.type === "slidingRate" && (
         <SlideRating
           id={question.question}
           label={question.question}
           value={feedbackAnswer?.value}
+          errors={errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",

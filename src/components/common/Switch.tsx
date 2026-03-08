@@ -5,6 +5,7 @@ type SwitchProps = {
   label: string;
   defaultValue?: number | string;
   value?: number | string;
+  errors?: [];
   onChange?: (value: number | string) => void;
 };
 
@@ -13,6 +14,7 @@ const Switch: React.FC<SwitchProps> = ({
   label = "",
   defaultValue,
   value,
+  errors = [],
   onChange,
 }) => {
   const [selectedValue, setSelectedValue] = useState(value ?? defaultValue);
@@ -23,13 +25,19 @@ const Switch: React.FC<SwitchProps> = ({
       onChange(e.target.value);
     }
   };
-  
+
+  const errorList = (
+    <>
+      {errors.map((error) => (
+        <p className="error-message">{error}</p>
+      ))}
+    </>
+  );
+
   return (
     <>
       <div className="form-group">
-        <label>
-          {label}-{value}
-        </label>
+        <label>{label}</label>
         <div className="radio-group">
           <label>
             <input
@@ -52,6 +60,7 @@ const Switch: React.FC<SwitchProps> = ({
             No
           </label>
         </div>
+        {errorList}
       </div>
     </>
   );

@@ -5,7 +5,7 @@ type TextFieldProps = {
   label: string;
   description?: string;
   value?: string;
-  required?: boolean;
+  errors?: [];
   onChange?: (value: number | string) => void;
 };
 
@@ -14,7 +14,7 @@ const TextField: React.FC<TextFieldProps> = ({
   label = "",
   description = "Enter a value",
   value,
-  required = false,
+  errors = [],
   onChange,
 }) => {
   const [selectedValue, setSelectedValue] = useState(value);
@@ -27,6 +27,14 @@ const TextField: React.FC<TextFieldProps> = ({
     }
   };
 
+  const errorList = (
+    <>
+      {errors.map((error) => (
+        <p className="error-message">{error}</p>
+      ))}
+    </>
+  );
+
   return (
     <>
       <div className="form-group">
@@ -35,10 +43,11 @@ const TextField: React.FC<TextFieldProps> = ({
           type="text"
           id={name}
           placeholder={description}
-          required={required}
           value={selectedValue}
           onChange={handleChange}
+          className={errors.length > 0 ? "input error" : ""}
         />
+        {errorList}
       </div>
     </>
   );

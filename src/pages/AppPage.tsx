@@ -1,11 +1,14 @@
 import { FeedbackProvider } from "../context/FeedbackContext";
+import { ValidationProvider } from "../context/FormValidationContext";
 import FeedbackList from "./FeedbackList.tsx";
 
 export default function AppPage() {
   return (
     <>
       <FeedbackProvider>
-        <FeedbackList />
+        <ValidationProvider>
+          <FeedbackList />
+        </ValidationProvider>
       </FeedbackProvider>
     </>
   );

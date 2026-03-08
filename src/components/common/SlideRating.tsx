@@ -7,6 +7,7 @@ type SlideRatingProps = {
   max?: number;
   defaultValue?: number;
   value?: number;
+  errors?: [];
   onChange?: (value: number) => void;
 };
 
@@ -17,6 +18,7 @@ const SlideRating: React.FC<SlideRatingProps> = ({
   max = 10,
   defaultValue = 5,
   value,
+  errors = [],
   onChange,
 }) => {
   const [selectedValue, setSelectedValue] = useState<number>(
@@ -31,6 +33,14 @@ const SlideRating: React.FC<SlideRatingProps> = ({
       onChange(rating);
     }
   };
+
+  const errorList = (
+    <>
+      {errors.map((error) => (
+        <p className="error-message">{error}</p>
+      ))}
+    </>
+  );
 
   return (
     <div className="form-group">
@@ -51,6 +61,7 @@ const SlideRating: React.FC<SlideRatingProps> = ({
         <span>Poor</span>
         <span>Excellent</span>
       </div>
+      {errorList}
     </div>
   );
 };

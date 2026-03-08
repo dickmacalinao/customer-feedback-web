@@ -8,18 +8,21 @@ export const staticQuestonCategories = [
         type: "slidingRate",
         question:
           "How would you rate the overall quality of the food and beverages you ordered today?",
+        validations: ["required"],
       },
       {
         id: 2,
         type: "yesNo",
         question:
           "Were the flavors, freshness, and presentation of your items satisfactory?",
+        validations: ["required"],
       },
       {
         id: 3,
         type: "yesNo",
         question:
           "Did your order meet your expectations based on the menu description?",
+        validations: ["required"],
       },
       {
         id: 4,
@@ -37,7 +40,7 @@ export const staticQuestonCategories = [
         type: "text",
         question:
           "Is there any specific item you particularly enjoyed or believe could be improved?",
-        required: true,
+        validations: ["required"],
       },
     ],
   },
@@ -80,6 +83,7 @@ export const staticQuestonCategories = [
         type: "text",
         question:
           "Is there anything our staff could do to improve your experience?",
+        validations: ["required"],
       },
     ],
   },

@@ -1,15 +1,16 @@
 import { useState, useEffect, useEffectEvent } from "react";
 
-// import TextField from "../components/common/TextField";
-// import Switch from "../components/common/Switch";
 // import Choices from "../components/common/Choices";
 // import MultipleChoices from "../components/common/MultipleChoices";
-// import TextArea from "../components/common/TextArea";
 // import Dropdown from "../components/common/Dropdown";
 import SubmitButton from "../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../types/CommonTypes";
 import { staticQuestonCategories } from "../mocks/questions";
 import { useFeedback } from "../context/FeedbackContext";
+import {
+  useValidation,
+  useValidationDispatch,
+} from "../context/FormValidationContext";
 
 import Category from "./Category";
 
@@ -18,6 +19,9 @@ export default function FeedbackList() {
     QuestionCategoryType[]
   >([]);
   const feedback = useFeedback();
+
+  const validations = useValidation();
+  const validationDispatch = useValidationDispatch();
 
   const getQuestions = useEffectEvent(() => {
     //TODO: This should be fetch from API
@@ -34,7 +38,11 @@ export default function FeedbackList() {
 
   function submitHandler() {
     // e.preventDefault();
-    console.log("Submit", feedback);
+    validationDispatch({
+      type: "validate-feedback",
+      quetionCategories,
+      feedback,
+    });
   }
 
   return (
@@ -51,18 +59,9 @@ export default function FeedbackList() {
             <Category category={category} key={category.id} />
           ))}
 
-          {/*
-          <TextField
-            name="fullName"
-            label="Full Name"
-            description="Enter your full name"
-          />
-          <TextField
-            name="email"
-            label="Email"
-            description="Enter your email"
-          />
+          {JSON.stringify(validations)}
 
+          {/*
           <Choices
             name="satisfaction"
             label="How satisfied are you with our service?"
@@ -74,10 +73,6 @@ export default function FeedbackList() {
               "Very Unsatisfied",
             ]}
           />
-          <Switch
-            name="recommend"
-            label="Would you recommend our company to others?"
-          />
           <MultipleChoices
             name="satisfaction"
             label="Which of our services have you used?"
@@ -88,13 +83,6 @@ export default function FeedbackList() {
               "Technical Assistance",
             ]}
           />
-          <TextArea
-            name="improve"
-            label="What can we improve?"
-            placeholder="Share your suggestions..."
-          />
-
-          
           <Dropdown
             name="rating"
             label="Overall Rating"
@@ -105,7 +93,8 @@ export default function FeedbackList() {
               { id: 2, value: "2 - Poor" },
               { id: 1, value: "1 - Very Poor" },
             ]}
-          />*/}
+          />
+          */}
           <SubmitButton label="Submit Feedback" onSubmit={submitHandler} />
         </form>
       </div>

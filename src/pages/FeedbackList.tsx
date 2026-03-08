@@ -15,9 +15,11 @@ import {
 import Category from "./Category";
 
 export default function FeedbackList() {
-  const [quetionCategories, setQuestionCategories] = useState<
+  const [questionCategories, setQuestionCategories] = useState<
     QuestionCategoryType[]
   >([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
   const feedback = useFeedback();
 
   const validations = useValidation();
@@ -36,11 +38,23 @@ export default function FeedbackList() {
     };
   }, []);
 
+  const updateCurrentPage = useEffectEvent(() => {
+    if (feedback && feedback.length > 0) {
+      setCurrentPage(currentPage + 1);
+    }
+  });
+
+  useEffect(() => {
+    if (validations && validations.length === 0) {
+      updateCurrentPage();
+    }
+  }, [validations]);
+
   function submitHandler() {
     // e.preventDefault();
     validationDispatch({
       type: "validate-feedback",
-      quetionCategories,
+      questionCategory: questionCategories[currentPage],
       feedback,
     });
   }
@@ -55,11 +69,14 @@ export default function FeedbackList() {
         </p>
 
         <form>
-          {quetionCategories.map((category) => (
-            <Category category={category} key={category.id} />
-          ))}
+          {questionCategories && questionCategories[currentPage] && (
+            <Category
+              category={questionCategories[currentPage]}
+              key={questionCategories[currentPage]?.id}
+            />
+          )}
 
-          {JSON.stringify(validations)}
+          {JSON.stringify(feedback)}
 
           {/*
           <Choices
@@ -95,7 +112,17 @@ export default function FeedbackList() {
             ]}
           />
           */}
-          <SubmitButton label="Submit Feedback" onSubmit={submitHandler} />
+          <label className="category-pages">
+            {currentPage + 1} of {questionCategories.length}
+          </label>
+          <SubmitButton
+            label={
+              currentPage + 1 === questionCategories.length
+                ? "Submit Feedback"
+                : "Continue >>>"
+            }
+            onSubmit={submitHandler}
+          />
         </form>
       </div>
     </>

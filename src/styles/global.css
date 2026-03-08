@@ -134,6 +134,10 @@ textarea {
   min-height: 100px;
 }
 
+.category-pages{
+  text-align: center;
+}
+
 .btn-submit {
   width: 100%;
   padding: 14px;

@@ -8,6 +8,7 @@ export const staticQuestonCategories = [
         type: "slidingRate",
         question:
           "How would you rate the overall quality of the food and beverages you ordered today?",
+        default: 5,
         validations: ["required"],
       },
       {
@@ -27,6 +28,7 @@ export const staticQuestonCategories = [
       {
         id: 4,
         type: "slidingRate",
+        default: 1,
         question:
           "How satisfied were you with the temperature and consistency of your beverage?",
       },

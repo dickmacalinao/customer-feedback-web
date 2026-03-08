@@ -32,7 +32,7 @@ export function useValidationDispatch() {
 
 type ActionProps = {
   type: string;
-  quetionCategories: QuestionCategoryType[];
+  questionCategory: QuestionCategoryType;
   feedback: FeedbackType[];
 };
 
@@ -44,11 +44,9 @@ function validationReducer(
   switch (action.type) {
     case "validate-feedback": {
       const validationList = [];
-      action.quetionCategories.forEach((cat) => {
-        cat.questions.forEach((q) => {
-          q.validations?.forEach((v) => {
-            validationList.push({ qId: q.id, validation: v });
-          });
+      action.questionCategory.questions.forEach((q) => {
+        q.validations?.forEach((v) => {
+          validationList.push({ qId: q.id, validation: v });
         });
       });
 

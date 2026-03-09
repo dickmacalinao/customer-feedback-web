@@ -20,17 +20,18 @@ export const staticQuestonCategories = [
       },
       {
         id: 3,
-        type: "yesNo",
+        type: "smileyRate",
+        default: 1,
         question:
-          "Did your order meet your expectations based on the menu description?",
+          "How satisfied were you with the temperature and consistency of your beverage?",
         validations: ["required"],
       },
       {
         id: 4,
-        type: "slidingRate",
-        default: 1,
+        type: "yesNo",
         question:
-          "How satisfied were you with the temperature and consistency of your beverage?",
+          "Did your order meet your expectations based on the menu description?",
+        validations: ["required"],
       },
       {
         id: 5,
@@ -89,41 +90,48 @@ export const staticQuestonCategories = [
       },
     ],
   },
-  /*
   {
+    id: 3,
     category: "Cleanliness & Ambience",
     questions: [
       {
+        id: 13,
         type: "slidingRate",
         question: "How would you rate the cleanliness of the dining area?",
       },
       {
+        id: 14,
         type: "yesNo",
         question:
           "Were the tables, restrooms, and service counters well maintained?",
       },
       {
+        id: 15,
         type: "slidingRate",
         question:
           "How comfortable was the seating and overall layout of the café?",
       },
       {
+        id: 16,
         type: "yesNo",
         question:
           "Did the atmosphere (lighting, music, décor) enhance your experience?",
       },
       {
+        id: 17,
         type: "slidingRate",
         question:
           "How satisfied were you with the noise level inside the café?",
       },
       {
+        id: 18,
         type: "text",
         question:
           "What improvements, if any, would make our environment more enjoyable?",
       },
     ],
   },
+  /*
   {
     category: "Speed & Efficiency",
     questions: [

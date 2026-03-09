@@ -87,45 +87,47 @@ export default function FeedbackList() {
               />
             )}
 
-            {JSON.stringify(feedback)}
-
             {/*
-          <Choices
-            name="satisfaction"
-            label="How satisfied are you with our service?"
-            choices={[
-              "Very Satisfied",
-              "Satisfied",
-              "Neutral",
-              "Unsatisfied",
-              "Very Unsatisfied",
-            ]}
-          />
-          <MultipleChoices
-            name="satisfaction"
-            label="Which of our services have you used?"
-            choices={[
-              "Customer Support",
-              "Online Ordering",
-              "Delivery Service",
-              "Technical Assistance",
-            ]}
-          />
-          <Dropdown
-            name="rating"
-            label="Overall Rating"
-            options={[
-              { id: 5, value: "5 - Excellent" },
-              { id: 4, value: "4 - Good" },
-              { id: 3, value: "3 - Average" },
-              { id: 2, value: "2 - Poor" },
-              { id: 1, value: "1 - Very Poor" },
-            ]}
-          />
-          */}
-            <label className="category-pages">
-              {currentPage + 1} of {questionCategories.length}
-            </label>
+            {JSON.stringify(feedback)}
+            
+            <Choices
+              name="satisfaction"
+              label="How satisfied are you with our service?"
+              choices={[
+                "Very Satisfied",
+                "Satisfied",
+                "Neutral",
+                "Unsatisfied",
+                "Very Unsatisfied",
+              ]}
+            />
+            <MultipleChoices
+              name="satisfaction"
+              label="Which of our services have you used?"
+              choices={[
+                "Customer Support",
+                "Online Ordering",
+                "Delivery Service",
+                "Technical Assistance",
+              ]}
+            />
+            <Dropdown
+              name="rating"
+              label="Overall Rating"
+              options={[
+                { id: 5, value: "5 - Excellent" },
+                { id: 4, value: "4 - Good" },
+                { id: 3, value: "3 - Average" },
+                { id: 2, value: "2 - Poor" },
+                { id: 1, value: "1 - Very Poor" },
+              ]}
+            />
+            */}
+            {questionCategories.length > 1 && (
+              <label className="category-pages">
+                {currentPage + 1} of {questionCategories.length}
+              </label>
+            )}
             <SubmitButton
               label={
                 currentPage + 1 === questionCategories.length

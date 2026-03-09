@@ -3,6 +3,8 @@ import { type QuestionType } from "../types/CommonTypes";
 import Switch from "../components/common/Switch";
 import TextField from "../components/common/TextField";
 import SlideRating from "../components/common/SlideRating";
+import SmileyRating from "../components/common/SmileyRating";
+
 import { useFeedback, useFeedbackDispatch } from "../context/FeedbackContext";
 import { useValidation } from "../context/FormValidationContext";
 
@@ -63,6 +65,22 @@ export default function Question({ question }: QuestionTypeProps) {
           label={question.question}
           value={feedbackAnswer?.value}
           defaultValue={question.default}
+          errors={errors}
+          onChange={(value) => {
+            dispatch({
+              type: "add-feedback",
+              id: question.id,
+              value,
+            });
+          }}
+        />
+      )}
+
+      {question.type === "smileyRate" && (
+        <SmileyRating
+          name={question.question}
+          label={question.question}
+          value={feedbackAnswer?.value}
           errors={errors}
           onChange={(value) => {
             dispatch({

@@ -1,0 +1,36 @@
+.smiley-rating {
+  margin-bottom: 25px;
+}
+
+.rating-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.smiley-container {
+  display: flex;
+  gap: 12px;
+  font-size: 28px;
+}
+
+.smiley {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.smiley:hover {
+  transform: scale(2);
+}
+
+.smiley.active {
+  opacity: 1;
+  font-size: 35px;
+}
+
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}

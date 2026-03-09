@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { type QuestionCategoryType } from "../types/CommonTypes";
+import { type QuestionCategoryType } from "../../types/CommonTypes";
 import Question from "./Question";
 
 type QuestionCategoryTypeProps = {

@@ -3,14 +3,14 @@ import { useState, useEffect, useEffectEvent } from "react";
 // import Choices from "../components/common/Choices";
 // import MultipleChoices from "../components/common/MultipleChoices";
 // import Dropdown from "../components/common/Dropdown";
-import SubmitButton from "../components/common/SubmitButton";
-import { type QuestionCategoryType } from "../types/CommonTypes";
-import { staticQuestonCategories } from "../mocks/questions";
-import { useFeedback } from "../context/FeedbackContext";
+import SubmitButton from "../../components/common/SubmitButton";
+import { type QuestionCategoryType } from "../../types/CommonTypes";
+import { staticQuestonCategories } from "../../mocks/questions";
+import { useFeedback } from "../../context/FeedbackContext";
 import {
   useValidation,
   useValidationDispatch,
-} from "../context/FormValidationContext";
+} from "../../context/FormValidationContext";
 
 import Category from "./Category";
 

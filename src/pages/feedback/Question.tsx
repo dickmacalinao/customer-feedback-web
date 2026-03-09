@@ -1,12 +1,15 @@
-import { type QuestionType } from "../types/CommonTypes";
+import { type QuestionType } from "../../types/CommonTypes";
 
-import Switch from "../components/common/Switch";
-import TextField from "../components/common/TextField";
-import SlideRating from "../components/common/SlideRating";
-import SmileyRating from "../components/common/SmileyRating";
+import Switch from "../../components/common/Switch";
+import TextField from "../../components/common/TextField";
+import SlideRating from "../../components/common/SlideRating";
+import SmileyRating from "../../components/common/SmileyRating";
 
-import { useFeedback, useFeedbackDispatch } from "../context/FeedbackContext";
-import { useValidation } from "../context/FormValidationContext";
+import {
+  useFeedback,
+  useFeedbackDispatch,
+} from "../../context/FeedbackContext";
+import { useValidation } from "../../context/FormValidationContext";
 
 type QuestionTypeProps = {
   question: QuestionType;
@@ -18,10 +21,10 @@ export default function Question({ question }: QuestionTypeProps) {
 
   const validations = useValidation();
 
-  const feedbackAnswer = feedback.find((f) => f.qId === question.id);
+  const feedbackAnswer = feedback?.find((f) => f.qId === question.id);
   const errors = validations
-    .filter((v) => v.qId === question.id)
-    .map((v) => {
+    ?.filter((v) => v.qId === question.id)
+    ?.map((v) => {
       return v.errorMessage;
     });
   // console.log(question, feedbackAnswer, errors);

@@ -20,7 +20,6 @@ const TextField: React.FC<TextFieldProps> = ({
   const [selectedValue, setSelectedValue] = useState(value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setSelectedValue(e.target.value);
     if (onChange) {
       onChange(e.target.value);
@@ -38,7 +37,7 @@ const TextField: React.FC<TextFieldProps> = ({
   return (
     <>
       <div className="form-group">
-        <label htmlFor={name}>{label}</label>
+        <label>{label}</label>
         <input
           type="text"
           id={name}

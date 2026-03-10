@@ -40,7 +40,7 @@ export const staticQuestonCategories = [
       },
       {
         id: 6,
-        type: "text",
+        type: "textarea",
         question:
           "Is there any specific item you particularly enjoyed or believe could be improved?",
         validations: ["required"],

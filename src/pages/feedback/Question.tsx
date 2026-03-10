@@ -2,6 +2,7 @@ import { type QuestionType } from "../../types/CommonTypes";
 
 import Switch from "../../components/common/Switch";
 import TextField from "../../components/common/TextField";
+import TextArea from "../../components/common/TextArea";
 import SlideRating from "../../components/common/SlideRating";
 import SmileyRating from "../../components/common/SmileyRating";
 
@@ -27,12 +28,28 @@ export default function Question({ question }: QuestionTypeProps) {
     ?.map((v) => {
       return v.errorMessage;
     });
-  // console.log(question, feedbackAnswer, errors);
 
   return (
     <>
       {question.type === "text" && (
         <TextField
+          name={question.question}
+          label={question.question}
+          description="Enter your answer"
+          value={feedbackAnswer?.value}
+          errors={errors}
+          onChange={(value) => {
+            dispatch({
+              type: "add-feedback",
+              id: question.id,
+              value,
+            });
+          }}
+        />
+      )}
+
+      {question.type === "textarea" && (
+        <TextArea
           name={question.question}
           label={question.question}
           description="Enter your answer"

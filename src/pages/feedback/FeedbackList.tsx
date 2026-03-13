@@ -132,7 +132,7 @@ export default function FeedbackList() {
               label={
                 currentPage + 1 === questionCategories.length
                   ? "Submit Feedback"
-                  : "Continue >>>"
+                  : "Continue"
               }
               onSubmit={submitHandler}
             />

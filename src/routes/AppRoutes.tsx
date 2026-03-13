@@ -9,7 +9,9 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/feedback" element={<Feedback />} />
-      <Route path="/admin" element={<Dashboard />} />
+      <Route path="/admin">
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

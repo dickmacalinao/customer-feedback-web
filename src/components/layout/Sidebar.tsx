@@ -9,11 +9,21 @@ import {
 } from "react-icons/fa"; // From Font Awesome
 import { MdDashboard } from "react-icons/md";
 
-export default function Sidebar() {
+type SideBarProp = {
+  onSelect?: (seleccted: string) => void;
+};
+
+export default function Sidebar({ onSelect }: SideBarProp) {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
+  };
+
+  const handleSelect = (selected: string) => {
+    if (onSelect) {
+      onSelect(selected);
+    }
   };
 
   return (
@@ -24,19 +34,19 @@ export default function Sidebar() {
       </div>
 
       <ul className="menu">
-        <li>
+        <li onClick={() => handleSelect("dashboard")}>
           <MdDashboard />
           {!collapsed && " Dashboard"}
         </li>
-        <li>
+        <li onClick={() => handleSelect("reports")}>
           <FaChartBar />
           {!collapsed && " Reports"}
         </li>
-        <li>
+        <li onClick={() => handleSelect("questions")}>
           <FaQuestionCircle />
           {!collapsed && " Questions"}
         </li>
-        <li>
+        <li onClick={() => handleSelect("settings")}>
           <FaCog />
           {!collapsed && " Settings"}
         </li>

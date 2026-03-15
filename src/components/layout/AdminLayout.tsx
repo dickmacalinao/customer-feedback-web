@@ -1,17 +1,23 @@
 import Sidebar from "./Sidebar";
-import Header from "./Header";
+import BreadCrumbHeader from "./BreadCrumbHeader";
 import Footer from "./Footer";
 
 type LayoutProps = {
+  header?: string;
+  onSideBarSelect?: (seleccted: string) => void;
   children: React.ReactNode;
 };
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({
+  header,
+  onSideBarSelect,
+  children,
+}: LayoutProps) {
   return (
     <div className="app-container">
-      <Sidebar />
+      <Sidebar onSelect={onSideBarSelect} />
       <div className="main-section">
-        <Header />
+        <BreadCrumbHeader header={header} />
         <div className="content">{children}</div>
         <Footer />
       </div>

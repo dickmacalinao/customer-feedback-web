@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 type SlideRatingProps = {
   id: string;
@@ -25,12 +25,6 @@ const SlideRating: React.FC<SlideRatingProps> = ({
     value ?? defaultValue
   );
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(defaultValue);
-    }
-  }, [onChange, defaultValue]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rating = Number(e.target.value);
     setSelectedValue(rating);
@@ -43,7 +37,9 @@ const SlideRating: React.FC<SlideRatingProps> = ({
   const errorList = (
     <>
       {errors.map((error) => (
-        <p className="error-message">{error}</p>
+        <p key={error} className="error-message">
+          {error}
+        </p>
       ))}
     </>
   );

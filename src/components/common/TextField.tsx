@@ -29,7 +29,9 @@ const TextField: React.FC<TextFieldProps> = ({
   const errorList = (
     <>
       {errors.map((error) => (
-        <p className="error-message">{error}</p>
+        <p key={error} className="error-message">
+          {error}
+        </p>
       ))}
     </>
   );

@@ -3,7 +3,7 @@ import { createContext, useReducer, useContext } from "react";
 import { type ChildrenProps } from "../types/PropTypes";
 import { type FeedbackType } from "../types/CommonTypes";
 
-const FeedbackContext = createContext(null);
+const FeedbackContext = createContext([]);
 const FeedbackDispatchContext = createContext(null);
 
 export function FeedbackProvider({ children }: ChildrenProps) {
@@ -30,6 +30,7 @@ type ActionProps = {
   type: string;
   id: number;
   value: string;
+  validations: [];
 };
 
 function feedbackReducer(feedback: FeedbackType[] = [], action: ActionProps) {
@@ -42,17 +43,43 @@ function feedbackReducer(feedback: FeedbackType[] = [], action: ActionProps) {
           {
             qId: action.id,
             value: action.value,
+            validations: action.validations,
+            validated: false,
           },
         ];
       } else {
         return feedback.map((f) => {
           if (f.qId === action.id) {
-            return { qId: action.id, value: action.value };
+            return {
+              qId: action.id,
+              value: action.value,
+              validations: action.validations,
+              validated: false,
+            };
           } else {
             return f;
           }
         });
       }
+    }
+    case "validate": {
+      return feedback.map((f) => {
+        if (f.validations && f.validations.length > 0) {
+          const errors: string[] = [];
+          f.validations.forEach((v) => {
+            // Mandatory valiadtion
+            if (v === "required" && (!f || !f.value)) {
+              errors.push("This is a required field.");
+            }
+          });
+          f.errors = errors;
+          f.validated = true;
+          return f;
+        } else {
+          f.validated = true;
+          return f;
+        }
+      });
     }
     default: {
       throw Error("Unknown action: " + action.type);

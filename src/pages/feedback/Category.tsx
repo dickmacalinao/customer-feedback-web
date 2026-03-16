@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { type QuestionCategoryType } from "../../types/CommonTypes";
 import Question from "./Question";
 
@@ -8,10 +6,6 @@ type QuestionCategoryTypeProps = {
 };
 
 export default function Category({ category }: QuestionCategoryTypeProps) {
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
-
   return (
     <>
       <h2>{category.category}</h2>

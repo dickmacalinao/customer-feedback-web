@@ -9,12 +9,15 @@ export type QuestionType = {
   type: string;
   question: string;
   default: string | number;
-  validations?: [];
+  validations?: string[];
 };
 
 export type FeedbackType = {
   qId: number;
   value: number | string;
+  validations?: string[];
+  errors?: string[];
+  validated?: boolean;
 };
 
 export type ValidationErrorType = {

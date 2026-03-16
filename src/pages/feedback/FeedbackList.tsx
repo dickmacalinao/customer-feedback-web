@@ -6,11 +6,10 @@ import { useState, useEffect, useEffectEvent } from "react";
 import SubmitButton from "../../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../../types/CommonTypes";
 import { staticQuestonCategories } from "../../mocks/questions";
-import { useFeedback } from "../../context/FeedbackContext";
 import {
-  useValidation,
-  useValidationDispatch,
-} from "../../context/FormValidationContext";
+  useFeedback,
+  useFeedbackDispatch,
+} from "../../context/FeedbackContext";
 
 import Category from "./Category";
 
@@ -22,13 +21,26 @@ export default function FeedbackList() {
   const [completed, setCompleted] = useState(false);
 
   const feedback = useFeedback();
+  const dispatch = useFeedbackDispatch();
 
-  const validations = useValidation();
-  const validationDispatch = useValidationDispatch();
+  function initiateCurrentFeedback(category: QuestionCategoryType) {
+    // console.log("currentPage", currentPage, category);
+    category.questions.forEach((q) => {
+      dispatch({
+        type: "add-feedback",
+        id: q.id,
+        value: q.default,
+        validations: q.validations,
+      });
+    });
+  }
 
   const getQuestions = useEffectEvent(() => {
     //TODO: This should be fetch from API
     setQuestionCategories(staticQuestonCategories);
+    if (staticQuestonCategories && staticQuestonCategories[currentPage]) {
+      initiateCurrentFeedback(staticQuestonCategories[currentPage]);
+    }
   });
 
   useEffect(() => {
@@ -45,23 +57,31 @@ export default function FeedbackList() {
         setCompleted(true);
       } else {
         setCurrentPage(currentPage + 1);
+        initiateCurrentFeedback(questionCategories[currentPage + 1]);
       }
     }
   });
 
   useEffect(() => {
-    if (validations && validations.length === 0) {
+    const unValidatedCount = feedback
+      ? feedback.filter((f) => !f.validated).length
+      : 0;
+    const errorCount = feedback
+      ? feedback.filter((f) => f.errors && f.errors.length > 0).length
+      : 0;
+    // console.log("unValidatedCount,errorCount", unValidatedCount, errorCount);
+
+    if (unValidatedCount === 0 && errorCount === 0) {
       updateCurrentPage();
     }
-  }, [validations]);
+  }, [feedback]);
 
   function submitHandler() {
     // e.preventDefault();
-    validationDispatch({
-      type: "validate-feedback",
-      questionCategory: questionCategories[currentPage],
-      feedback,
+    dispatch({
+      type: "validate",
     });
+    // console.log(feedback.filter((f) => f.errors && f.errors.length > 0).length);
   }
 
   return (
@@ -88,8 +108,6 @@ export default function FeedbackList() {
             )}
 
             {/*
-            {JSON.stringify(feedback)}
-            
             <Choices
               name="satisfaction"
               label="How satisfied are you with our service?"
@@ -138,6 +156,7 @@ export default function FeedbackList() {
             />
           </form>
         )}
+        {JSON.stringify(feedback)}
       </div>
     </>
   );

@@ -10,7 +10,6 @@ import {
   useFeedback,
   useFeedbackDispatch,
 } from "../../context/FeedbackContext";
-import { useValidation } from "../../context/FormValidationContext";
 
 type QuestionTypeProps = {
   question: QuestionType;
@@ -20,14 +19,7 @@ export default function Question({ question }: QuestionTypeProps) {
   const feedback = useFeedback();
   const dispatch = useFeedbackDispatch();
 
-  const validations = useValidation();
-
   const feedbackAnswer = feedback?.find((f) => f.qId === question.id);
-  const errors = validations
-    ?.filter((v) => v.qId === question.id)
-    ?.map((v) => {
-      return v.errorMessage;
-    });
 
   return (
     <>
@@ -37,12 +29,13 @@ export default function Question({ question }: QuestionTypeProps) {
           label={question.question}
           description="Enter your answer"
           value={feedbackAnswer?.value}
-          errors={errors}
+          errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
               id: question.id,
               value,
+              validations: question.validations,
             });
           }}
         />
@@ -54,12 +47,13 @@ export default function Question({ question }: QuestionTypeProps) {
           label={question.question}
           description="Enter your answer"
           value={feedbackAnswer?.value}
-          errors={errors}
+          errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
               id: question.id,
               value,
+              validations: question.validations,
             });
           }}
         />
@@ -69,12 +63,13 @@ export default function Question({ question }: QuestionTypeProps) {
           name={question.question}
           label={question.question}
           value={feedbackAnswer?.value}
-          errors={errors}
+          errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
               id: question.id,
               value,
+              validations: question.validations,
             });
           }}
         />
@@ -85,12 +80,13 @@ export default function Question({ question }: QuestionTypeProps) {
           label={question.question}
           value={feedbackAnswer?.value}
           defaultValue={question.default}
-          errors={errors}
+          errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
               id: question.id,
               value,
+              validations: question.validations,
             });
           }}
         />
@@ -101,12 +97,13 @@ export default function Question({ question }: QuestionTypeProps) {
           name={question.question}
           label={question.question}
           value={feedbackAnswer?.value}
-          errors={errors}
+          errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
               type: "add-feedback",
               id: question.id,
               value,
+              validations: question.validations,
             });
           }}
         />

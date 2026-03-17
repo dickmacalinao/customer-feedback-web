@@ -98,19 +98,15 @@ export default function FeedbackList() {
       ? feedbackForm.feedback.filter((f) => f.errors && f.errors.length > 0)
           .length
       : 0;
-    // console.log("unValidatedCount,errorCount", unValidatedCount, errorCount);
-
     if (unValidatedCount === 0 && errorCount === 0) {
       updateCurrentPage();
     }
-  }, [feedbackForm]);
+  }, [feedbackForm.feedback]);
 
   function submitHandler() {
-    // e.preventDefault();
     dispatch({
       type: "validate",
     });
-    // console.log(feedback.filter((f) => f.errors && f.errors.length > 0).length);
   }
 
   return (
@@ -157,6 +153,8 @@ export default function FeedbackList() {
                   ? "Submit Feedback"
                   : "Continue"
               }
+              disabled={feedbackForm.loading || feedbackForm.submitting}
+              loading={feedbackForm.loading || feedbackForm.submitting}
               onSubmit={submitHandler}
             />
           </form>

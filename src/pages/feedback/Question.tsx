@@ -103,6 +103,7 @@ export default function Question({ question }: QuestionTypeProps) {
           name={question.question}
           label={question.question}
           value={feedbackAnswer?.value}
+          disabled={feedbackForm.loading || feedbackForm.submitting}
           errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({

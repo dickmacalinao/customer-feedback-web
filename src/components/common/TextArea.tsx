@@ -5,6 +5,7 @@ type TextAreaProps = {
   label: string;
   description?: string;
   value?: string;
+  disabled?: boolean;
   errors?: [];
   onChange?: (value: number | string) => void;
 };
@@ -14,6 +15,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   label = "",
   description = "Enter your message.",
   value,
+  disabled = false,
   errors = [],
   onChange,
 }) => {
@@ -43,6 +45,7 @@ const TextArea: React.FC<TextAreaProps> = ({
           id={name}
           placeholder={description}
           value={selectedValue}
+          disabled={disabled}
           onChange={handleChange}
           className={errors.length > 0 ? "input error" : ""}
         ></textarea>

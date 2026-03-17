@@ -20,6 +20,12 @@ export type FeedbackType = {
   validated?: boolean;
 };
 
+export type FeedbackFormType = {
+  loading: boolean;
+  submitting: boolean;
+  feedback: FeedbackType[];
+};
+
 export type ValidationErrorType = {
   qId: number;
   errorMessage: string;

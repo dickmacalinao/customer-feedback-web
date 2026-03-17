@@ -1,17 +1,21 @@
 import { createContext, useReducer, useContext } from "react";
 
 import { type ChildrenProps } from "../types/PropTypes";
-import { type FeedbackType } from "../types/CommonTypes";
+import { type FeedbackFormType } from "../types/CommonTypes";
 import { validate, getMessage } from "../validators/Validator";
 
-const FeedbackContext = createContext([]);
+const FeedbackContext = createContext(null);
 const FeedbackDispatchContext = createContext(null);
 
 export function FeedbackProvider({ children }: ChildrenProps) {
-  const [feedback, dispatch] = useReducer(feedbackReducer, []);
+  const [feedbackForm, dispatch] = useReducer(feedbackReducer, {
+    loading: false,
+    submitting: false,
+    feedback: [],
+  });
 
   return (
-    <FeedbackContext value={feedback}>
+    <FeedbackContext value={feedbackForm}>
       <FeedbackDispatchContext value={dispatch}>
         {children}
       </FeedbackDispatchContext>
@@ -19,7 +23,7 @@ export function FeedbackProvider({ children }: ChildrenProps) {
   );
 }
 
-export function useFeedback() {
+export function useFeedbackForm() {
   return useContext(FeedbackContext);
 }
 
@@ -30,56 +34,81 @@ export function useFeedbackDispatch() {
 type ActionProps = {
   type: string;
   id: number;
-  value: string;
+  value: string | boolean;
   validations: [];
 };
 
-function feedbackReducer(feedback: FeedbackType[] = [], action: ActionProps) {
-  // console.log(action);
+function feedbackReducer(feedbackForm: FeedbackFormType, action: ActionProps) {
   switch (action.type) {
     case "add-feedback": {
-      if (!feedback.find((f) => f.qId === action.id)) {
-        return [
-          ...feedback,
-          {
-            qId: action.id,
-            value: action.value,
-            validations: action.validations,
-            validated: false,
-          },
-        ];
-      } else {
-        return feedback.map((f) => {
-          if (f.qId === action.id) {
-            return {
+      if (!feedbackForm.feedback.find((f) => f.qId === action.id)) {
+        return {
+          loading: feedbackForm.loading,
+          submitting: feedbackForm.submitting,
+          feedback: [
+            ...feedbackForm.feedback,
+            {
               qId: action.id,
               value: action.value,
               validations: action.validations,
               validated: false,
-            };
-          } else {
-            return f;
-          }
-        });
+            },
+          ],
+        };
+      } else {
+        return {
+          loading: feedbackForm.loading,
+          submitting: feedbackForm.submitting,
+          feedback: feedbackForm.feedback.map((f) => {
+            if (f.qId === action.id) {
+              return {
+                qId: action.id,
+                value: action.value,
+                validations: action.validations,
+                validated: false,
+              };
+            } else {
+              return f;
+            }
+          }),
+        };
       }
     }
     case "validate": {
-      return feedback.map((f) => {
-        if (f.validations && f.validations.length > 0) {
-          const errors: string[] = [];
-          f.validations.forEach((v) => {
-            if (!validate(v, f.value)) {
-              errors.push(getMessage());
-            }
-          });
-          f.errors = errors;
-          f.validated = true;
-          return f;
-        } else {
-          f.validated = true;
-          return f;
-        }
-      });
+      return {
+        loading: feedbackForm.loading,
+        submitting: feedbackForm.submitting,
+        feedback: feedbackForm.feedback.map((f) => {
+          if (f.validations && f.validations.length > 0) {
+            const errors: string[] = [];
+            f.validations.forEach((v) => {
+              if (!validate(v, f.value)) {
+                errors.push(getMessage());
+              }
+            });
+            f.errors = errors;
+            f.validated = true;
+            return f;
+          } else {
+            f.validated = true;
+            return f;
+          }
+        }),
+      };
+    }
+    case "update-loading": {
+      return {
+        loading: action.value,
+        submitting: feedbackForm.submitting,
+        feedback: feedbackForm.feedback,
+      };
+    }
+    case "update-submit": {
+      return {
+        loading: feedbackForm.loading,
+        submitting: action.value,
+        feedback: feedbackForm.feedback,
+      };
     }
     default: {
       throw Error("Unknown action: " + action.type);

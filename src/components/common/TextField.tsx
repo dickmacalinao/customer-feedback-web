@@ -5,6 +5,7 @@ type TextFieldProps = {
   label: string;
   description?: string;
   value?: string;
+  disabled?: boolean;
   errors?: [];
   onChange?: (value: number | string) => void;
 };
@@ -14,6 +15,7 @@ const TextField: React.FC<TextFieldProps> = ({
   label = "",
   description = "Enter a value",
   value,
+  disabled = false,
   errors = [],
   onChange,
 }) => {
@@ -45,6 +47,7 @@ const TextField: React.FC<TextFieldProps> = ({
           id={name}
           placeholder={description}
           value={selectedValue}
+          disabled={disabled}
           onChange={handleChange}
           className={errors.length > 0 ? "input error" : ""}
         />

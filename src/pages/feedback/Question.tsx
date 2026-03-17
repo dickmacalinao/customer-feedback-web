@@ -7,7 +7,7 @@ import SlideRating from "../../components/common/SlideRating";
 import SmileyRating from "../../components/common/SmileyRating";
 
 import {
-  useFeedback,
+  useFeedbackForm,
   useFeedbackDispatch,
 } from "../../context/FeedbackContext";
 
@@ -16,10 +16,12 @@ type QuestionTypeProps = {
 };
 
 export default function Question({ question }: QuestionTypeProps) {
-  const feedback = useFeedback();
+  const feedbackForm = useFeedbackForm();
   const dispatch = useFeedbackDispatch();
 
-  const feedbackAnswer = feedback?.find((f) => f.qId === question.id);
+  const feedbackAnswer = feedbackForm.feedback?.find(
+    (f) => f.qId === question.id
+  );
 
   return (
     <>
@@ -29,6 +31,7 @@ export default function Question({ question }: QuestionTypeProps) {
           label={question.question}
           description="Enter your answer"
           value={feedbackAnswer?.value}
+          disabled={feedbackForm.loading || feedbackForm.submitting}
           errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
@@ -47,6 +50,7 @@ export default function Question({ question }: QuestionTypeProps) {
           label={question.question}
           description="Enter your answer"
           value={feedbackAnswer?.value}
+          disabled={feedbackForm.loading || feedbackForm.submitting}
           errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({
@@ -63,6 +67,7 @@ export default function Question({ question }: QuestionTypeProps) {
           name={question.question}
           label={question.question}
           value={feedbackAnswer?.value}
+          disabled={feedbackForm.loading || feedbackForm.submitting}
           errors={feedbackAnswer?.errors}
           onChange={(value) => {
             dispatch({

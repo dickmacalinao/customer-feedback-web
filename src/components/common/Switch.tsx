@@ -5,6 +5,7 @@ type SwitchProps = {
   label: string;
   defaultValue?: number | string;
   value?: number | string;
+  disabled?: boolean;
   errors?: [];
   onChange?: (value: number | string) => void;
 };
@@ -14,6 +15,7 @@ const Switch: React.FC<SwitchProps> = ({
   label = "",
   defaultValue,
   value,
+  disabled = false,
   errors = [],
   onChange,
 }) => {
@@ -47,6 +49,7 @@ const Switch: React.FC<SwitchProps> = ({
               name={name}
               value="yes"
               checked={selectedValue === "yes"}
+              disabled={disabled}
               onChange={handleChange}
             />
             Yes
@@ -57,6 +60,7 @@ const Switch: React.FC<SwitchProps> = ({
               name={name}
               value="no"
               checked={selectedValue === "no"}
+              disabled={disabled}
               onChange={handleChange}
             />
             No

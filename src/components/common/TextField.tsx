@@ -4,9 +4,9 @@ type TextFieldProps = {
   name: string | number | undefined;
   label: string;
   description?: string;
-  value?: string;
+  value?: number | string | null | undefined;
   disabled?: boolean;
-  errors?: [];
+  errors?: string[];
   onChange?: (value: number | string) => void;
 };
 

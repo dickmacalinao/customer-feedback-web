@@ -4,9 +4,9 @@ type SwitchProps = {
   name: string;
   label: string;
   defaultValue?: number | string;
-  value?: number | string;
+  value?: number | string | null | undefined;
   disabled?: boolean;
-  errors?: [];
+  errors?: string[];
   onChange?: (value: number | string) => void;
 };
 

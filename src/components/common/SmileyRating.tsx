@@ -3,10 +3,10 @@ import React, { useState } from "react";
 type SmileyRatingProps = {
   label: string;
   name: string;
-  value?: number;
+  value?: number | string | null | undefined;
   disabled?: boolean;
+  errors?: string[];
   onChange?: (value: number) => void;
-  errors?: [];
 };
 
 const emojis = ["😡", "😕", "😐", "🙂", "😍"];
@@ -16,8 +16,8 @@ const SmileyRating: React.FC<SmileyRatingProps> = ({
   name,
   value = 0,
   disabled = false,
-  onChange,
   errors = [],
+  onChange,
 }) => {
   const [hover, setHover] = useState<number | null>(null);
 

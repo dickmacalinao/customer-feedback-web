@@ -14,7 +14,7 @@ export type QuestionType = {
 
 export type FeedbackType = {
   qId: number;
-  value: number | string;
+  value: number | string | null | undefined;
   validations?: string[];
   errors?: string[];
   validated?: boolean;

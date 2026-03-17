@@ -5,10 +5,10 @@ type SlideRatingProps = {
   label: string;
   min?: number;
   max?: number;
-  defaultValue?: number;
-  value?: number;
+  defaultValue?: string | number;
+  value?: number | string | null | undefined;
   disabled?: boolean;
-  errors?: [];
+  errors?: string[];
   onChange?: (value: number) => void;
 };
 

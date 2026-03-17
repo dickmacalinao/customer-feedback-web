@@ -25,10 +25,9 @@ export default function FeedbackList() {
   const feedbackForm = useFeedbackForm();
   const dispatch = useFeedbackDispatch();
 
-  const loading = feedbackForm?.loading;
+  const loading = feedbackForm.loading;
 
   function initiateCurrentFeedback(category: QuestionCategoryType) {
-    // console.log("currentPage", currentPage, category);
     category.questions.forEach((q) => {
       dispatch({
         type: "add-feedback",

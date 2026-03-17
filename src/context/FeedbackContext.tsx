@@ -1,18 +1,21 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useReducer, useContext } from "react";
 
 import { type ChildrenProps } from "../types/PropTypes";
 import { type FeedbackFormType } from "../types/CommonTypes";
 import { validate, getMessage } from "../validators/Validator";
 
-const FeedbackContext = createContext(null);
+const initialValue: FeedbackFormType = {
+  loading: false,
+  submitting: false,
+  feedback: [],
+};
+
+const FeedbackContext = createContext(initialValue);
 const FeedbackDispatchContext = createContext(null);
 
 export function FeedbackProvider({ children }: ChildrenProps) {
-  const [feedbackForm, dispatch] = useReducer(feedbackReducer, {
-    loading: false,
-    submitting: false,
-    feedback: [],
-  });
+  const [feedbackForm, dispatch] = useReducer(feedbackReducer, initialValue);
 
   return (
     <FeedbackContext value={feedbackForm}>

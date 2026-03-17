@@ -4,6 +4,7 @@ type SmileyRatingProps = {
   label: string;
   name: string;
   value?: number;
+  disabled?: boolean;
   onChange?: (value: number) => void;
   errors?: [];
 };
@@ -14,6 +15,7 @@ const SmileyRating: React.FC<SmileyRatingProps> = ({
   label,
   name,
   value = 0,
+  disabled = false,
   onChange,
   errors = [],
 }) => {
@@ -49,9 +51,9 @@ const SmileyRating: React.FC<SmileyRatingProps> = ({
               className={`smiley ${
                 ratingValue <= (hover ?? value) ? "active" : ""
               }`}
-              onClick={() => handleChange(ratingValue)}
-              onMouseEnter={() => setHover(ratingValue)}
-              onMouseLeave={() => setHover(null)}
+              onClick={() => !disabled && handleChange(ratingValue)}
+              onMouseEnter={() => !disabled && setHover(ratingValue)}
+              onMouseLeave={() => !disabled && setHover(null)}
             >
               {emoji}
             </span>

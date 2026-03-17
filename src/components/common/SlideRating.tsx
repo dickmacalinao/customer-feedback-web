@@ -7,6 +7,7 @@ type SlideRatingProps = {
   max?: number;
   defaultValue?: number;
   value?: number;
+  disabled?: boolean;
   errors?: [];
   onChange?: (value: number) => void;
 };
@@ -18,6 +19,7 @@ const SlideRating: React.FC<SlideRatingProps> = ({
   max = 10,
   defaultValue = 5,
   value,
+  disabled = false,
   errors = [],
   onChange,
 }) => {
@@ -55,6 +57,7 @@ const SlideRating: React.FC<SlideRatingProps> = ({
           min={min}
           max={max}
           value={selectedValue}
+          disabled={disabled}
           onChange={handleChange}
         />
       </div>

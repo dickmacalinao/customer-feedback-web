@@ -2,6 +2,7 @@ import { createContext, useReducer, useContext } from "react";
 
 import { type ChildrenProps } from "../types/PropTypes";
 import { type FeedbackType } from "../types/CommonTypes";
+import { validate, getMessage } from "../validators/Validator";
 
 const FeedbackContext = createContext([]);
 const FeedbackDispatchContext = createContext(null);
@@ -67,9 +68,8 @@ function feedbackReducer(feedback: FeedbackType[] = [], action: ActionProps) {
         if (f.validations && f.validations.length > 0) {
           const errors: string[] = [];
           f.validations.forEach((v) => {
-            // Mandatory valiadtion
-            if (v === "required" && (!f || !f.value)) {
-              errors.push("This is a required field.");
+            if (!validate(v, f.value)) {
+              errors.push(getMessage());
             }
           });
           f.errors = errors;

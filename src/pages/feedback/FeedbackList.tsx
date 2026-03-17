@@ -10,6 +10,11 @@ import {
   useFeedback,
   useFeedbackDispatch,
 } from "../../context/FeedbackContext";
+import Skeleton from "../../components/skeleton/Skeleton";
+import TextAreaSkeleton from "../../components/skeleton/TextAreaSkeleton";
+import SwitchSkeleton from "../../components/skeleton/SwitchSkeleton";
+import SlideRatingSkeleton from "../../components/skeleton/SlideRatingSkeleton";
+import SmileyRatingSkeleton from "../../components/skeleton/SmileyRatingSkeleton";
 
 import Category from "./Category";
 
@@ -17,6 +22,7 @@ export default function FeedbackList() {
   const [questionCategories, setQuestionCategories] = useState<
     QuestionCategoryType[]
   >([]);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [completed, setCompleted] = useState(false);
 
@@ -37,10 +43,14 @@ export default function FeedbackList() {
 
   const getQuestions = useEffectEvent(() => {
     //TODO: This should be fetch from API
-    setQuestionCategories(staticQuestonCategories);
-    if (staticQuestonCategories && staticQuestonCategories[currentPage]) {
-      initiateCurrentFeedback(staticQuestonCategories[currentPage]);
-    }
+    setLoading(true);
+    setTimeout(() => {
+      setQuestionCategories(staticQuestonCategories);
+      if (staticQuestonCategories && staticQuestonCategories[currentPage]) {
+        initiateCurrentFeedback(staticQuestonCategories[currentPage]);
+      }
+      setLoading(false);
+    }, 5000);
   });
 
   useEffect(() => {
@@ -94,11 +104,21 @@ export default function FeedbackList() {
             help us improve our services.
           </p>
         )}
-        {completed && (
-          <p className="description completed">Thank you for your feedback!</p>
+
+        {loading && (
+          <>
+            <div style={{ marginBottom: 20 }}>
+              <Skeleton width="60%" height="25px" />
+            </div>
+
+            <SlideRatingSkeleton />
+            <SwitchSkeleton />
+            <SmileyRatingSkeleton />
+            <TextAreaSkeleton />
+          </>
         )}
 
-        {!completed && (
+        {!loading && !completed && (
           <form>
             {questionCategories && questionCategories[currentPage] && (
               <Category
@@ -155,6 +175,10 @@ export default function FeedbackList() {
               onSubmit={submitHandler}
             />
           </form>
+        )}
+
+        {!loading && completed && (
+          <p className="description completed">Thank you for your feedback!</p>
         )}
         {JSON.stringify(feedback)}
       </div>

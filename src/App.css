@@ -1,6 +1,7 @@
 
 @import 'styles/global';
 @import 'styles/layout';
+@import 'styles/table';
 @import 'styles/slidingRating';
 @import 'styles/smileyRating';
 @import 'styles/skeleton';

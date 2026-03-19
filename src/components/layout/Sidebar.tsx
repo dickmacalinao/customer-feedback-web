@@ -10,10 +10,11 @@ import {
 import { MdDashboard } from "react-icons/md";
 
 type SideBarProp = {
+  selectedMenu?: string;
   onSelect?: (seleccted: string) => void;
 };
 
-export default function Sidebar({ onSelect }: SideBarProp) {
+export default function Sidebar({ selectedMenu, onSelect }: SideBarProp) {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -34,19 +35,31 @@ export default function Sidebar({ onSelect }: SideBarProp) {
       </div>
 
       <ul className="menu">
-        <li onClick={() => handleSelect("dashboard")}>
+        <li
+          onClick={() => handleSelect("dashboard")}
+          className={selectedMenu === "dashboard" ? "active" : ""}
+        >
           <MdDashboard />
           {!collapsed && " Dashboard"}
         </li>
-        <li onClick={() => handleSelect("reports")}>
+        <li
+          onClick={() => handleSelect("reports")}
+          className={selectedMenu === "reports" ? "active" : ""}
+        >
           <FaChartBar />
           {!collapsed && " Reports"}
         </li>
-        <li onClick={() => handleSelect("questions")}>
+        <li
+          onClick={() => handleSelect("categories")}
+          className={selectedMenu === "categories" ? "active" : ""}
+        >
           <FaQuestionCircle />
-          {!collapsed && " Questions"}
+          {!collapsed && " Categories"}
         </li>
-        <li onClick={() => handleSelect("settings")}>
+        <li
+          onClick={() => handleSelect("settings")}
+          className={selectedMenu === "settings" ? "active" : ""}
+        >
           <FaCog />
           {!collapsed && " Settings"}
         </li>

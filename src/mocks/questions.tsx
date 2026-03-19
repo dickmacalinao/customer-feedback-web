@@ -1,6 +1,7 @@
 export const staticQuestonCategories = [
   {
     id: 1,
+    order: 1,
     category: "Product Quality (Food & Beverages)",
     questions: [
       {
@@ -49,6 +50,7 @@ export const staticQuestonCategories = [
   },
   {
     id: 2,
+    order: 2,
     category: "Customer Service",
     questions: [
       {
@@ -92,6 +94,7 @@ export const staticQuestonCategories = [
   },
   {
     id: 3,
+    order: 3,
     category: "Cleanliness & Ambience",
     questions: [
       {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import DashboardWidgets from "./DashboardWidgets";
 import Reports from "./Reports";
-import Questions from "./Questions";
+import Categories from "./Categories";
 import Settings from "./Settings";
 
 export default function Dashboard() {
@@ -14,8 +14,8 @@ export default function Dashboard() {
       ? "Dashboard"
       : selectedMenu === "reports"
       ? "Reports"
-      : selectedMenu === "questions"
-      ? "Questions"
+      : selectedMenu === "categories"
+      ? "Categories"
       : selectedMenu === "settings"
       ? "Settings"
       : "";
@@ -26,10 +26,14 @@ export default function Dashboard() {
   };
 
   return (
-    <AdminLayout header={getHedar} onSideBarSelect={handleSideBarSelect}>
+    <AdminLayout
+      header={getHedar}
+      selectedMenu={selectedMenu}
+      onSideBarSelect={handleSideBarSelect}
+    >
       {selectedMenu === "dashboard" && <DashboardWidgets />}
       {selectedMenu === "reports" && <Reports />}
-      {selectedMenu === "questions" && <Questions />}
+      {selectedMenu === "categories" && <Categories />}
       {selectedMenu === "settings" && <Settings />}
     </AdminLayout>
   );

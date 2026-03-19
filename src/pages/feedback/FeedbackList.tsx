@@ -7,11 +7,7 @@ import {
   useFeedbackForm,
   useFeedbackDispatch,
 } from "../../context/FeedbackContext";
-import Skeleton from "../../components/skeleton/Skeleton";
-import TextAreaSkeleton from "../../components/skeleton/TextAreaSkeleton";
-import SwitchSkeleton from "../../components/skeleton/SwitchSkeleton";
-import SlideRatingSkeleton from "../../components/skeleton/SlideRatingSkeleton";
-import SmileyRatingSkeleton from "../../components/skeleton/SmileyRatingSkeleton";
+import FeedbackListSkeleton from "./FeedbackListSkeleton";
 
 import Category from "./Category";
 
@@ -119,18 +115,7 @@ export default function FeedbackList() {
           </p>
         )}
 
-        {loading && (
-          <>
-            <div style={{ marginBottom: 20 }}>
-              <Skeleton width="60%" height="25px" />
-            </div>
-
-            <SlideRatingSkeleton />
-            <SwitchSkeleton />
-            <SmileyRatingSkeleton />
-            <TextAreaSkeleton />
-          </>
-        )}
+        {loading && <FeedbackListSkeleton />}
 
         {!loading && !completed && questionCategories.length > 0 && (
           <form>

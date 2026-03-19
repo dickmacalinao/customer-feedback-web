@@ -19,7 +19,7 @@ const SmileyRating: React.FC<SmileyRatingProps> = ({
   errors = [],
   onChange,
 }) => {
-  const [hover, setHover] = useState<number | null>(null);
+  const [hover, setHover] = useState<number>(0);
 
   const handleChange = (rating: number) => {
     if (onChange) {
@@ -49,11 +49,11 @@ const SmileyRating: React.FC<SmileyRatingProps> = ({
             <span
               key={ratingValue}
               className={`smiley ${
-                ratingValue <= (hover ?? value) ? "active" : ""
+                ratingValue <= (value ?? hover) ? "active" : ""
               }`}
               onClick={() => !disabled && handleChange(ratingValue)}
               onMouseEnter={() => !disabled && setHover(ratingValue)}
-              onMouseLeave={() => !disabled && setHover(null)}
+              onMouseLeave={() => !disabled && setHover(0)}
             >
               {emoji}
             </span>

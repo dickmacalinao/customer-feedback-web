@@ -1,5 +1,6 @@
 export type QuestionCategoryType = {
   id: number;
+  order: number;
   category: string;
   questions: QuestionType[];
 };

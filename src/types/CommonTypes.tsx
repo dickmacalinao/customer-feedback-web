@@ -27,6 +27,12 @@ export type FeedbackFormType = {
   feedback: FeedbackType[];
 };
 
+export type CategoryFormType = {
+  loading: boolean;
+  submitting: boolean;
+  categories: QuestionCategoryType[];
+};
+
 export type ValidationErrorType = {
   qId: number;
   errorMessage: string;

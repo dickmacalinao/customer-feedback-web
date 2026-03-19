@@ -3,27 +3,42 @@ import { useState, useEffect, useEffectEvent } from "react";
 import DataTable from "../../components/common/DataTable";
 import { staticQuestonCategories } from "../../mocks/questions";
 import { type QuestionCategoryType } from "../../types/CommonTypes";
+import {
+  useCategoryForm,
+  useCategoryDispatch,
+} from "../../context/CategoryContext";
 
 export default function Categories() {
   const [questionCategories, setQuestionCategories] = useState<
     QuestionCategoryType[]
   >([]);
 
+  const categoryForm = useCategoryForm();
+  const dispatch = useCategoryDispatch();
+
   const columns = [
     { key: "order", label: "Order" },
     { key: "category", label: "Category" },
   ] as const;
 
-  const getQuestions = useEffectEvent(() => {
+  const getCategories = useEffectEvent(() => {
     //TODO: This should be fetch from API
+    dispatch({
+      type: "update-loading",
+      value: true,
+    });
     setTimeout(() => {
       setQuestionCategories(staticQuestonCategories);
-    }, 500);
+      dispatch({
+        type: "update-loading",
+        value: false,
+      });
+    }, 2000);
   });
 
   useEffect(() => {
     console.log("Start synchronization");
-    getQuestions();
+    getCategories();
     return () => {
       console.log("Stop synchronization");
     };
@@ -34,6 +49,7 @@ export default function Categories() {
       data={questionCategories}
       columns={columns}
       allowAction={false}
+      loading={categoryForm.loading}
       onView={(row) => alert(`View ${row.category}`)}
       onEdit={(row) => alert(`Edit ${row.category}`)}
       onDelete={(row) => alert(`Delete ${row.category}`)}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import RowActionMenu from "./RowActionMenu";
+import Skeleton from "../skeleton/Skeleton";
 
 type Column<T> = {
   key: keyof T;
@@ -12,6 +13,7 @@ type DataTableProps<T> = {
   columns: Column<T>[];
   pageSize?: number;
   allowAction?: boolean;
+  loading?: boolean;
   onView?: (row: T) => void;
   onEdit?: (row: T) => void;
   onDelete?: (row: T) => void;
@@ -22,6 +24,7 @@ export default function DataTable<T extends { id: number }>({
   columns,
   pageSize = 5,
   allowAction = true,
+  loading = false,
   onView,
   onEdit,
   onDelete,
@@ -39,51 +42,68 @@ export default function DataTable<T extends { id: number }>({
     <div className="table-container">
       <table className="table">
         <thead>
-          <tr>
-            {columns.map((col) => (
-              <th key={String(col.key)}>{col.label}</th>
-            ))}
-            {allowAction && <th className="action">Actions</th>}
-          </tr>
+          {loading && (
+            <tr>
+              {columns.map(() => (
+                <th>
+                  <Skeleton width="30%" height="20px" />
+                </th>
+              ))}
+              {allowAction && (
+                <th className="action">
+                  <Skeleton width="30%" height="20px" />
+                </th>
+              )}
+            </tr>
+          )}
+
+          {!loading && (
+            <tr>
+              {columns.map((col) => (
+                <th key={String(col.key)}>{col.label}</th>
+              ))}
+              {allowAction && <th className="action">Actions</th>}
+            </tr>
+          )}
         </thead>
 
         <tbody>
-          {paginatedData.map((row) => (
-            <tr key={row.id}>
-              {columns.map((col) => (
-                <td key={String(col.key)}>{String(row[col.key])}</td>
-              ))}
+          {loading &&
+            [1, 2, 3].map((i) => (
+              <tr>
+                {columns.map(() => (
+                  <th>
+                    <Skeleton width="50%" height="20px" />
+                  </th>
+                ))}
 
-              {allowAction && (
-                <td className="action">
-                  {/*
-                  <div className="actions">
-                    <select
-                      onChange={(e) => {
-                        const action = e.target.value;
+                {allowAction && (
+                  <th className="action">
+                    <Skeleton width="20%" height="20px" />
+                  </th>
+                )}
+              </tr>
+            ))}
 
-                        if (action === "view") onView?.(row);
-                        if (action === "edit") onEdit?.(row);
-                        if (action === "delete") onDelete?.(row);
-                      }}
-                    >
-                      <option value="">Actions</option>
-                      <option value="view">View</option>
-                      <option value="edit">Edit</option>
-                      <option value="delete">Delete</option>
-                    </select>
-                  </div>
-                  */}
-                  <RowActionMenu
-                    row={row}
-                    onView={onView}
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                  />
-                </td>
-              )}
-            </tr>
-          ))}
+          {!loading &&
+            paginatedData.map((row) => (
+              <tr key={row.id}>
+                {columns.map((col) => (
+                  <td key={String(col.key)}>{String(row[col.key])}</td>
+                ))}
+
+                {allowAction && (
+                  <td className="action">
+                    <RowActionMenu
+                      row={row}
+                      onView={onView}
+                      onEdit={onEdit}
+                      onDelete={onDelete}
+                    />
+                  </td>
+                )}
+              </tr>
+            ))}
         </tbody>
       </table>
 

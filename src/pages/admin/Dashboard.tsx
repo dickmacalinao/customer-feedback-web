@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import AdminLayout from "../../components/layout/AdminLayout";
+
+import { CategoryProvider } from "../../context/CategoryContext";
 import DashboardWidgets from "./DashboardWidgets";
 import Reports from "./Reports";
 import Categories from "./Categories";
@@ -33,7 +35,11 @@ export default function Dashboard() {
     >
       {selectedMenu === "dashboard" && <DashboardWidgets />}
       {selectedMenu === "reports" && <Reports />}
-      {selectedMenu === "categories" && <Categories />}
+      {selectedMenu === "categories" && (
+        <CategoryProvider>
+          <Categories />
+        </CategoryProvider>
+      )}
       {selectedMenu === "settings" && <Settings />}
     </AdminLayout>
   );

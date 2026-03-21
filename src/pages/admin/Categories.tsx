@@ -1,4 +1,5 @@
 import { useState, useEffect, useEffectEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 import DataTable from "../../components/common/DataTable";
 import { staticQuestonCategories } from "../../mocks/questions";
@@ -9,6 +10,7 @@ import {
 } from "../../context/CategoryContext";
 
 export default function Categories() {
+  const navigate = useNavigate();
   const [questionCategories, setQuestionCategories] = useState<
     QuestionCategoryType[]
   >([]);
@@ -28,7 +30,11 @@ export default function Categories() {
       value: true,
     });
     setTimeout(() => {
-      setQuestionCategories(staticQuestonCategories);
+      const moodifiedData: QuestionCategoryType[] = [
+        ...staticQuestonCategories,
+      ];
+      moodifiedData.map((category) => console.log(category));
+      setQuestionCategories(moodifiedData);
       dispatch({
         type: "update-loading",
         value: false,
@@ -45,14 +51,23 @@ export default function Categories() {
   }, []);
 
   return (
-    <DataTable
-      data={questionCategories}
-      columns={columns}
-      allowAction={false}
-      loading={categoryForm.loading}
-      onView={(row) => alert(`View ${row.category}`)}
-      onEdit={(row) => alert(`Edit ${row.category}`)}
-      onDelete={(row) => alert(`Delete ${row.category}`)}
-    />
+    <>
+      <DataTable
+        data={questionCategories}
+        columns={columns}
+        allowAction={false}
+        loading={categoryForm.loading}
+        onView={(row) => alert(`View ${row.category}`)}
+        onEdit={(row) => alert(`Edit ${row.category}`)}
+        onDelete={(row) => alert(`Delete ${row.category}`)}
+      />
+      <h2
+        onClick={() => {
+          navigate("/feedback");
+        }}
+      >
+        Test
+      </h2>
+    </>
   );
 }

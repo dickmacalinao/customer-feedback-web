@@ -7,6 +7,7 @@ import Admin from "../pages/admin/Admin";
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Without layout */}
       <Route path="/" element={<Home />} />
       <Route path="/feedback" element={<Feedback />} />
       <Route path="/admin" element={<Admin />} />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import {
   FaArrowRight,
@@ -9,22 +10,11 @@ import {
 } from "react-icons/fa"; // From Font Awesome
 import { MdDashboard } from "react-icons/md";
 
-type SideBarProp = {
-  selectedMenu?: string;
-  onSelect?: (seleccted: string) => void;
-};
-
-export default function Sidebar({ selectedMenu, onSelect }: SideBarProp) {
+export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
-  };
-
-  const handleSelect = (selected: string) => {
-    if (onSelect) {
-      onSelect(selected);
-    }
   };
 
   return (
@@ -34,36 +24,34 @@ export default function Sidebar({ selectedMenu, onSelect }: SideBarProp) {
         {!collapsed && <FaArrowLeft onClick={toggleSidebar} />}
       </div>
 
-      <ul className="menu">
-        <li
-          onClick={() => handleSelect("dashboard")}
-          className={selectedMenu === "dashboard" ? "active" : ""}
-        >
-          <MdDashboard />
-          {!collapsed && " Dashboard"}
-        </li>
-        <li
-          onClick={() => handleSelect("reports")}
-          className={selectedMenu === "reports" ? "active" : ""}
-        >
-          <FaChartBar />
-          {!collapsed && " Reports"}
-        </li>
-        <li
-          onClick={() => handleSelect("categories")}
-          className={selectedMenu === "categories" ? "active" : ""}
-        >
-          <FaQuestionCircle />
-          {!collapsed && " Categories"}
-        </li>
-        <li
-          onClick={() => handleSelect("settings")}
-          className={selectedMenu === "settings" ? "active" : ""}
-        >
-          <FaCog />
-          {!collapsed && " Settings"}
-        </li>
-      </ul>
+      <nav>
+        <ul className="menu">
+          <li>
+            <NavLink to="/dashboard">
+              <MdDashboard />
+              {!collapsed && " Dashboard"}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/reports">
+              <FaChartBar />
+              {!collapsed && " Reports"}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/categories">
+              <FaQuestionCircle />
+              {!collapsed && " Categories"}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/settings">
+              <FaCog />
+              {!collapsed && " Settings"}
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }

@@ -1,26 +1,17 @@
 import Sidebar from "./Sidebar";
 import BreadCrumbHeader from "./BreadCrumbHeader";
 import Footer from "./Footer";
+import { Outlet } from "react-router-dom";
 
-type LayoutProps = {
-  header?: string;
-  selectedMenu?: string;
-  onSideBarSelect?: (seleccted: string) => void;
-  children: React.ReactNode;
-};
-
-export default function Layout({
-  header,
-  selectedMenu,
-  onSideBarSelect,
-  children,
-}: LayoutProps) {
+export default function AdminLayout() {
   return (
     <div className="app-container">
-      <Sidebar selectedMenu={selectedMenu} onSelect={onSideBarSelect} />
+      <Sidebar />
       <div className="main-section">
-        <BreadCrumbHeader header={header} />
-        <div className="content">{children}</div>
+        <BreadCrumbHeader />
+        <div className="content">
+          <Outlet /> {/* 👈 Page content renders here */}
+        </div>
         <Footer />
       </div>
     </div>

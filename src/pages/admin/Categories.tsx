@@ -33,7 +33,7 @@ export default function Categories() {
       const moodifiedData: QuestionCategoryType[] = [
         ...staticQuestonCategories,
       ];
-      moodifiedData.map((category) => console.log(category));
+      // moodifiedData.map((category) => console.log(category));
       setQuestionCategories(moodifiedData);
       dispatch({
         type: "update-loading",

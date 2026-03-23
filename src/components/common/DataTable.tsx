@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import RowActionMenu from "./RowActionMenu";
 import Skeleton from "../skeleton/Skeleton";
@@ -38,6 +39,8 @@ export default function DataTable<T extends { id: number }>({
     currentPage * pageSize
   );
 
+  console.log(data);
+
   return (
     <div className="table-container">
       <table className="table">
@@ -69,7 +72,7 @@ export default function DataTable<T extends { id: number }>({
 
         <tbody>
           {loading &&
-            [1, 2, 3].map((i) => (
+            [1, 2, 3].map(() => (
               <tr>
                 {columns.map(() => (
                   <th>
@@ -88,9 +91,15 @@ export default function DataTable<T extends { id: number }>({
           {!loading &&
             paginatedData.map((row) => (
               <tr key={row.id}>
-                {columns.map((col) => (
-                  <td key={String(col.key)}>{String(row[col.key])}</td>
-                ))}
+                {columns.map((col) =>
+                  row["path"] && row["pathCol"] === col.key ? (
+                    <td key={String(col.key)}>
+                      <Link to={row["path"]}>{String(row[col.key])}</Link>
+                    </td>
+                  ) : (
+                    <td key={String(col.key)}>{String(row[col.key])}</td>
+                  )
+                )}
 
                 {allowAction && (
                   <td className="action">

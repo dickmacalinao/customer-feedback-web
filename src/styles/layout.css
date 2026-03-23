@@ -76,3 +76,22 @@
   color: #6c757d;
   padding-bottom: 5px;
 }
+
+.breadcrumb {
+  font-size: 16px;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+
+.breadcrumb a {
+  color: #2563eb;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb .current {
+  color: #6b7280;
+}

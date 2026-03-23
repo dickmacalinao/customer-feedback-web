@@ -44,6 +44,12 @@
   text-decoration: underline;
 }
 
+
+.menu a {
+  font-weight: bolder;
+  color: mintcream;
+}
+
 /* Main */
 
 .main-section {
@@ -85,11 +91,17 @@
 }
 
 .breadcrumb a {
-  color: #2563eb;
+  color: #082b72;
+  font-weight: bolder;
 }
 
 .breadcrumb a:hover {
   text-decoration: underline;
+}
+
+.breadcrumb .previous {
+  color: #082b72;
+  font-weight: bolder;
 }
 
 .breadcrumb .current {

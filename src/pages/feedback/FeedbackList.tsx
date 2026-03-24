@@ -1,13 +1,14 @@
 import { useState, useEffect, useEffectEvent } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import SubmitButton from "../../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../../types/CommonTypes";
-import { staticQuestonCategories } from "../../mocks/questions";
 import {
   useFeedbackForm,
   useFeedbackDispatch,
 } from "../../context/FeedbackContext";
 import FeedbackListSkeleton from "./FeedbackListSkeleton";
+import { fetchCategories } from "../../api/categories";
 
 import Category from "./Category";
 
@@ -34,32 +35,6 @@ export default function FeedbackList() {
     });
   }
 
-  const getQuestions = useEffectEvent(() => {
-    //TODO: This should be fetch from API
-    dispatch({
-      type: "update-loading",
-      value: true,
-    });
-    setTimeout(() => {
-      setQuestionCategories(staticQuestonCategories);
-      if (staticQuestonCategories && staticQuestonCategories[currentPage]) {
-        initiateCurrentFeedback(staticQuestonCategories[currentPage]);
-      }
-      dispatch({
-        type: "update-loading",
-        value: false,
-      });
-    }, 2000);
-  });
-
-  useEffect(() => {
-    console.log("Start synchronization");
-    getQuestions();
-    return () => {
-      console.log("Stop synchronization");
-    };
-  }, []);
-
   function submitFeedback() {
     dispatch({
       type: "update-submit",
@@ -74,6 +49,12 @@ export default function FeedbackList() {
     }, 10000);
   }
 
+  function submitHandler() {
+    dispatch({
+      type: "validate",
+    });
+  }
+
   const updateCurrentPage = useEffectEvent(() => {
     if (feedbackForm.feedback && feedbackForm.feedback.length > 0) {
       if (currentPage + 1 === questionCategories.length) {
@@ -82,6 +63,19 @@ export default function FeedbackList() {
         setCurrentPage(currentPage + 1);
         initiateCurrentFeedback(questionCategories[currentPage + 1]);
       }
+    }
+  });
+
+  // Fetch data from api
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchCategories,
+  });
+
+  const setQuestions = useEffectEvent(() => {
+    if (data && data.data && data.data[currentPage]) {
+      setQuestionCategories(data.data);
+      initiateCurrentFeedback(data.data[currentPage]);
     }
   });
 
@@ -98,11 +92,22 @@ export default function FeedbackList() {
     }
   }, [feedbackForm.feedback]);
 
-  function submitHandler() {
+  useEffect(() => {
+    console.log("Start synchronization");
     dispatch({
-      type: "validate",
+      type: "update-loading",
+      value: isLoading,
     });
-  }
+    if (!isLoading && !error) {
+      setQuestions();
+    }
+
+    return () => {
+      console.log("Stop synchronization");
+    };
+  }, [dispatch, isLoading, error]);
+
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>

@@ -1,11 +1,12 @@
 import { useState, useEffect, useEffectEvent } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import DataTable from "../../components/common/DataTable";
-import { staticQuestonCategories } from "../../mocks/questions";
 import {
   useCategoryForm,
   useCategoryDispatch,
 } from "../../context/CategoryContext";
+import { fetchCategories } from "../../api/categories";
 
 export type ModifiedQuestionCategoryType = {
   id: number;
@@ -28,15 +29,16 @@ export default function CategoriesTable() {
     { key: "category", label: "Category" },
   ] as const;
 
-  const getCategories = useEffectEvent(() => {
-    //TODO: This should be fetch from API
-    dispatch({
-      type: "update-loading",
-      value: true,
-    });
-    setTimeout(() => {
+  // Fetch data from api
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchCategories,
+  });
+
+  const getModifiedCategories = useEffectEvent(() => {
+    if (data) {
       let moodifiedData: ModifiedQuestionCategoryType[] = [];
-      staticQuestonCategories.map(
+      data.data.map(
         (i) =>
           (moodifiedData = [
             ...moodifiedData,
@@ -50,22 +52,26 @@ export default function CategoriesTable() {
           ])
       );
 
-      // moodifiedData.map((category) => console.log(category));
       setQuestionCategories(moodifiedData);
-      dispatch({
-        type: "update-loading",
-        value: false,
-      });
-    }, 2000);
+    }
   });
 
   useEffect(() => {
     console.log("Start synchronization");
-    getCategories();
+    dispatch({
+      type: "update-loading",
+      value: isLoading,
+    });
+    if (!isLoading && !error) {
+      getModifiedCategories();
+    }
+
     return () => {
       console.log("Stop synchronization");
     };
-  }, []);
+  }, [dispatch, isLoading, error]);
+
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>

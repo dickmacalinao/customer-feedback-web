@@ -39,7 +39,7 @@ export default function DataTable<T extends { id: number }>({
     currentPage * pageSize
   );
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="table-container">

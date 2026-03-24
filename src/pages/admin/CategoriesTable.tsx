@@ -7,6 +7,7 @@ import {
   useCategoryDispatch,
 } from "../../context/CategoryContext";
 import { fetchCategories } from "../../api/categories";
+import { type QuestionCategoryType } from "../../types/CommonTypes";
 
 export type ModifiedQuestionCategoryType = {
   id: number;
@@ -39,7 +40,7 @@ export default function CategoriesTable() {
     if (data) {
       let moodifiedData: ModifiedQuestionCategoryType[] = [];
       data.data.map(
-        (i) =>
+        (i: QuestionCategoryType) =>
           (moodifiedData = [
             ...moodifiedData,
             {
@@ -71,19 +72,20 @@ export default function CategoriesTable() {
     };
   }, [dispatch, isLoading, error]);
 
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
     <>
-      <DataTable
-        data={questionCategories}
-        columns={columns}
-        allowAction={false}
-        loading={categoryForm.loading}
-        onView={(row) => alert(`View ${row.category}`)}
-        onEdit={(row) => alert(`Edit ${row.category}`)}
-        onDelete={(row) => alert(`Delete ${row.category}`)}
-      />
+      {error && <p className="description error">{error.message}</p>}
+      {!error && (
+        <DataTable
+          data={questionCategories}
+          columns={columns}
+          allowAction={false}
+          loading={categoryForm.loading}
+          onView={(row) => alert(`View ${row.category}`)}
+          onEdit={(row) => alert(`Edit ${row.category}`)}
+          onDelete={(row) => alert(`Delete ${row.category}`)}
+        />
+      )}
     </>
   );
 }

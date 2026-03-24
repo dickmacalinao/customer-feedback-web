@@ -107,8 +107,6 @@ export default function FeedbackList() {
     };
   }, [dispatch, isLoading, error]);
 
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
     <>
       <div className="container">
@@ -152,7 +150,10 @@ export default function FeedbackList() {
         {!loading && completed && (
           <p className="description completed">Thank you for your feedback!</p>
         )}
-        {JSON.stringify(feedbackForm)}
+
+        {error && <p className="description error">{error.message}</p>}
+
+        {/*JSON.stringify(feedbackForm)*/}
       </div>
     </>
   );

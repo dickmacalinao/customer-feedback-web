@@ -32,6 +32,9 @@ p.description {
   &.completed {
     font-weight: bold;
   }
+  &.error {
+    color: firebrick;
+  }
 }
 
 .form-group {

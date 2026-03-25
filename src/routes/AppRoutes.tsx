@@ -4,7 +4,7 @@ import Feedback from "../pages/feedback/Feedback";
 import Dashboard from "../pages/admin/Dashboard";
 import Reports from "../pages/admin/Reports";
 import Categories from "../pages/admin/Categories";
-import CategoryDetail from "../pages/admin/CategoryDetail";
+import Category from "../pages/admin/Category";
 import Settings from "../pages/admin/Settings";
 import NotFound from "../pages/NotFound";
 
@@ -23,7 +23,7 @@ export default function AppRoutes() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/categories/:id" element={<CategoryDetail />} />
+        <Route path="/categories/:id" element={<Category />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
 

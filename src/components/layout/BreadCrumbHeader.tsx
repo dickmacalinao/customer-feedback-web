@@ -1,12 +1,6 @@
 import { useLocation, useParams, Link } from "react-router-dom";
 
-import {
-  FaArrowRight,
-  FaArrowLeft,
-  FaQuestionCircle,
-  FaCog,
-  FaChartBar,
-} from "react-icons/fa"; // From Font Awesome
+import { FaArrowRight } from "react-icons/fa"; // From Font Awesome
 
 type BreadcrumbItem = {
   label: string | number;
@@ -47,13 +41,7 @@ export default function BreadCrumbHeader() {
             <span className="current">{item.label}</span>
           )}
 
-          {index < breadCrumb.length - 1 && (
-            <>
-              &nbsp;
-              <FaArrowRight />
-              &nbsp;
-            </>
-          )}
+          {index < breadCrumb.length - 1 && <>&nbsp;/&nbsp;</>}
         </span>
       ))}
     </nav>

@@ -33,6 +33,12 @@ export type CategoryFormType = {
   categories: QuestionCategoryType[];
 };
 
+export type QuestionFormType = {
+  loading: boolean;
+  submitting: boolean;
+  questions: QuestionType[];
+};
+
 export type ValidationErrorType = {
   qId: number;
   errorMessage: string;

@@ -97,7 +97,11 @@ export default function DataTable<T extends { id: number }>({
                       <Link to={row["path"]}>{String(row[col.key])}</Link>
                     </td>
                   ) : (
-                    <td key={String(col.key)}>{String(row[col.key])}</td>
+                    <td key={String(col.key)}>
+                      {typeof row[col.key] === "object"
+                        ? row[col.key]
+                        : String(row[col.key])}
+                    </td>
                   )
                 )}
 

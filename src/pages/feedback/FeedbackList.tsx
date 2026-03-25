@@ -68,7 +68,7 @@ export default function FeedbackList() {
 
   // Fetch data from api
   const { data, isLoading, error } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["categories"],
     queryFn: fetchCategories,
   });
 

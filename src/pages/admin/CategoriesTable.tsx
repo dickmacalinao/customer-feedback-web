@@ -58,7 +58,6 @@ export default function CategoriesTable() {
   });
 
   useEffect(() => {
-    console.log("Start synchronization");
     dispatch({
       type: "update-loading",
       value: isLoading,
@@ -68,7 +67,7 @@ export default function CategoriesTable() {
     }
 
     return () => {
-      console.log("Stop synchronization");
+      // console.log("Stop synchronization");
     };
   }, [dispatch, isLoading, error]);
 

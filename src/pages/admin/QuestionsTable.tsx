@@ -48,7 +48,7 @@ export default function QuestionsTable({ questions }: QuestionProps) {
     });
   }
 
-  console.log(modifiedQuestionsData);
+  // console.log(modifiedQuestionsData);
   return (
     <DataTable
       data={modifiedQuestionsData}

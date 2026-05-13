@@ -75,6 +75,8 @@
   padding: 25px;
   flex: 1;
   background: #fafafa;
+  overflow-y: auto;
+  color: #6c757d;
 }
 
 .footer {

@@ -11,7 +11,7 @@ import { type QuestionCategoryType } from "../../types/CommonTypes";
 
 export type ModifiedQuestionCategoryType = {
   id: number;
-  order: number;
+  order_seq: number;
   category: string;
   path: string;
   pathCol: string;
@@ -26,7 +26,7 @@ export default function CategoriesTable() {
   const dispatch = useCategoryDispatch();
 
   const columns = [
-    { key: "order", label: "Order" },
+    { key: "order_seq", label: "Order" },
     { key: "category", label: "Category" },
   ] as const;
 
@@ -45,7 +45,7 @@ export default function CategoriesTable() {
             ...moodifiedData,
             {
               id: i.id,
-              order: i.order,
+              order_seq: i.order_seq,
               category: i.category,
               path: "/categories/" + i.id,
               pathCol: "category",

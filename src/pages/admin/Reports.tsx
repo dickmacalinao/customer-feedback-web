@@ -1,5 +1,8 @@
 // src/App.tsx
 import { useState } from "react";
+
+import Tabs from "../../components/common/Tabs";
+
 import {
   BarChart,
   Bar,
@@ -15,6 +18,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+
+const tabs = [
+  { id: "sales", label: "Monthly Sales Trend" },
+  { id: "category", label: "Sales by Category" },
+];
+
+const selectedTab = "sales";
 
 // Sample Data - Monthly Sales Report
 const monthlyData = [
@@ -44,6 +54,8 @@ export default function Reports() {
         <div className="text-center mb-10">
           <p className="text-gray-600">January - June 2026</p>
         </div>
+
+        <Tabs tabs={tabs} selected="selectedTab" />
 
         {/* Tabs */}
         <div className="flex justify-center mb-8 gap-4">
@@ -164,10 +176,6 @@ export default function Reports() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-        </div>
-
-        <div className="text-center text-gray-500 text-sm mt-12">
-          Built with React + Recharts • Simple & Responsive
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ export type QuestionType = {
   id: number;
   type: string;
   question: string;
-  default: string | number;
+  default_value: string | number;
   validations?: string[];
 };
 

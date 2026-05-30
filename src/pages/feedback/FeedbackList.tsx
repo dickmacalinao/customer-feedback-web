@@ -29,7 +29,7 @@ export default function FeedbackList() {
       dispatch({
         type: "add-feedback",
         id: q.id,
-        value: q.default,
+        value: q.default_value,
         validations: q.validations,
       });
     });

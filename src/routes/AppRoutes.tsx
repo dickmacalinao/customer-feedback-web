@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Redirect from "../pages/Redirect";
 import Feedback from "../pages/feedback/Feedback";
 import Login from "../pages/admin/Login";
 import Dashboard from "../pages/admin/Dashboard";

@@ -9,26 +9,31 @@ type BreadcrumbItem = {
 
 export default function BreadCrumbHeader() {
   const location = useLocation();
+  const { customerSlug } = useParams();
   const { id } = useParams();
 
-  const regExp = /^[a-zA-Z0-9]*\/categories\/[0-9]*$/;
+  const regExp = /^\/[a-zA-Z0-9-]*\/categories\/[0-9]*$/;
   let breadCrumb: BreadcrumbItem[] = [];
 
-  if (location.pathname === "/dashboard") {
+  if (location.pathname.endsWith("/dashboard")) {
     breadCrumb = [{ label: "Dashboard" }];
-  } else if (location.pathname === "/reports") {
+  } else if (location.pathname.endsWith("/reports")) {
     breadCrumb = [{ label: "Reports" }];
-  } else if (location.pathname === "/categories") {
+  } else if (location.pathname.endsWith("/categories")) {
     breadCrumb = [{ label: "Categories" }];
   } else if (regExp.test(location.pathname)) {
     breadCrumb = [
-      { label: "Categories", path: "/categories" },
+      { label: "Categories", path: "/" + customerSlug + "/categories" },
       { label: id ?? "" },
     ];
-  } else if (location.pathname === "/settings") {
+  } else if (location.pathname.endsWith("/settings")) {
     breadCrumb = [{ label: "Settings" }];
   } else {
-    breadCrumb = [{ label: "Header" }];
+    breadCrumb = [
+      {
+        label: "Header",
+      },
+    ];
   }
 
   return (

@@ -1,5 +1,6 @@
 import { useState, useEffect, useEffectEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 import SubmitButton from "../../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../../types/CommonTypes";
@@ -23,6 +24,8 @@ export default function FeedbackList() {
   const dispatch = useFeedbackDispatch();
 
   const loading = feedbackForm.loading;
+
+  const { customerSlug } = useParams();
 
   function initiateCurrentFeedback(category: QuestionCategoryType) {
     category.questions.forEach((q) => {
@@ -69,7 +72,7 @@ export default function FeedbackList() {
   // Fetch data from api
   const { data, isLoading, error } = useQuery({
     queryKey: ["categories"],
-    queryFn: fetchCategories,
+    queryFn: () => fetchCategories(customerSlug),
   });
 
   const setQuestions = useEffectEvent(() => {

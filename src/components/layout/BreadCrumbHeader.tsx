@@ -1,6 +1,6 @@
 import { useLocation, useParams, Link } from "react-router-dom";
 
-import { FaArrowRight } from "react-icons/fa"; // From Font Awesome
+// import { FaArrowRight } from "react-icons/fa"; // From Font Awesome
 
 type BreadcrumbItem = {
   label: string | number;
@@ -11,7 +11,7 @@ export default function BreadCrumbHeader() {
   const location = useLocation();
   const { id } = useParams();
 
-  const regExp = /^\/categories\/[0-9]*$/;
+  const regExp = /^[a-zA-Z0-9]*\/categories\/[0-9]*$/;
   let breadCrumb: BreadcrumbItem[] = [];
 
   if (location.pathname === "/dashboard") {

@@ -16,15 +16,15 @@ export default function AppRoutes() {
       {/* Without layout */}
       <Route path="/login" element={<Login />} />
 
-      <Route path="/feedback" element={<Feedback />} />
+      <Route path="/:customerSlug/feedback" element={<Feedback />} />
 
       {/* Routes with the persistent layout */}
       <Route element={<AdminLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/categories/:id" element={<Category />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/:customerSlug/dashboard" element={<Dashboard />} />
+        <Route path="/:customerSlug/reports" element={<Reports />} />
+        <Route path="/:customerSlug/categories" element={<Categories />} />
+        <Route path="/:customerSlug/categories/:id" element={<Category />} />
+        <Route path="/:customerSlug/settings" element={<Settings />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

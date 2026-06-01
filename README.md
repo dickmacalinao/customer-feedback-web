@@ -114,3 +114,19 @@ docker-compose up --build
 # docker build -t customer-feedback-web --build-arg VITE_API_URL=https://customer-feedback-web.com .
 # docker run -p 3000:80 customer-feedback-web
 
+
+## 🐳 Docker Commands
+
+```bash
+# Start in background
+docker compose up -d --build
+
+# View logs
+docker compose logs -f
+
+# Stop containers
+docker compose down
+
+# Rebuild after changes
+docker compose up --build
+```

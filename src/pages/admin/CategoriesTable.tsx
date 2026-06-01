@@ -1,5 +1,6 @@
 import { useState, useEffect, useEffectEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 import DataTable from "../../components/common/DataTable";
 import {
@@ -30,10 +31,12 @@ export default function CategoriesTable() {
     { key: "category", label: "Category" },
   ] as const;
 
+  const { customerSlug } = useParams();
+
   // Fetch data from api
   const { data, isLoading, error } = useQuery({
     queryKey: ["categories"],
-    queryFn: fetchCategories,
+    queryFn: () => fetchCategories(customerSlug),
   });
 
   const getModifiedCategories = useEffectEvent(() => {
@@ -47,7 +50,7 @@ export default function CategoriesTable() {
               id: i.id,
               order_seq: i.order_seq,
               category: i.category,
-              path: "/categories/" + i.id,
+              path: "/" + customerSlug + "/categories/" + i.id,
               pathCol: "category",
             },
           ])

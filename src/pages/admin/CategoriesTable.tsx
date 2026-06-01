@@ -1,6 +1,6 @@
 import { useState, useEffect, useEffectEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import DataTable from "../../components/common/DataTable";
 import {
@@ -19,6 +19,7 @@ export type ModifiedQuestionCategoryType = {
 };
 
 export default function CategoriesTable() {
+  const [cookies] = useCookies(["customer_token"]);
   const [questionCategories, setQuestionCategories] = useState<
     ModifiedQuestionCategoryType[]
   >([]);
@@ -31,12 +32,10 @@ export default function CategoriesTable() {
     { key: "category", label: "Category" },
   ] as const;
 
-  const { customerSlug } = useParams();
-
   // Fetch data from api
   const { data, isLoading, error } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => fetchCategories(customerSlug),
+    queryFn: () => fetchCategories(cookies.customer_token),
   });
 
   const getModifiedCategories = useEffectEvent(() => {
@@ -50,7 +49,7 @@ export default function CategoriesTable() {
               id: i.id,
               order_seq: i.order_seq,
               category: i.category,
-              path: "/" + customerSlug + "/categories/" + i.id,
+              path: "/categories/" + i.id,
               pathCol: "category",
             },
           ])

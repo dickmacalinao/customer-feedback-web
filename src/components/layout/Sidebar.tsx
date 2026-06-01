@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -12,6 +13,8 @@ import { MdDashboard } from "react-icons/md";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+
+  const { customerSlug } = useParams();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -27,25 +30,25 @@ export default function Sidebar() {
       <nav>
         <ul className="menu">
           <li>
-            <NavLink to="/dashboard">
+            <NavLink to={`/${customerSlug}/dashboard`}>
               <MdDashboard />
               {!collapsed && " Dashboard"}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/reports">
+            <NavLink to={`/${customerSlug}/reports`}>
               <FaChartBar />
               {!collapsed && " Reports"}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/categories">
+            <NavLink to={`/${customerSlug}/categories`}>
               <FaQuestionCircle />
               {!collapsed && " Categories"}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/settings">
+            <NavLink to={`/${customerSlug}/settings`}>
               <FaCog />
               {!collapsed && " Settings"}
             </NavLink>

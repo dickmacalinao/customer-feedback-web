@@ -10,13 +10,13 @@ import QuestionsTable from "./QuestionsTable";
 
 export default function CategoryDetail() {
   const { id } = useParams();
-  const dispatch = useQuestionDispatch();
+  const { customerSlug } = useParams();
 
-  // console.log(id);
+  const dispatch = useQuestionDispatch();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["category"],
-    queryFn: () => fetchCategoryById(parseInt(id)),
+    queryFn: () => fetchCategoryById(customerSlug, parseInt(id)),
     enabled: !!id, // 👈 prevents call if id is undefined
   });
 

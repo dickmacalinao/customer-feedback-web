@@ -1,6 +1,6 @@
 import { useState, useEffect, useEffectEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 
 import SubmitButton from "../../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../../types/CommonTypes";
@@ -14,7 +14,6 @@ import { fetchCategories } from "../../api/categories";
 import Category from "./Category";
 
 export default function FeedbackList() {
-  const [cookies] = useCookies(["customer_token"]);
   const [questionCategories, setQuestionCategories] = useState<
     QuestionCategoryType[]
   >([]);
@@ -25,6 +24,8 @@ export default function FeedbackList() {
   const dispatch = useFeedbackDispatch();
 
   const loading = feedbackForm.loading;
+
+  const { customerSlug } = useParams();
 
   function initiateCurrentFeedback(category: QuestionCategoryType) {
     category.questions.forEach((q) => {
@@ -71,7 +72,7 @@ export default function FeedbackList() {
   // Fetch data from api
   const { data, isLoading, error } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => fetchCategories(cookies.customer_token),
+    queryFn: () => fetchCategories(customerSlug),
   });
 
   const setQuestions = useEffectEvent(() => {

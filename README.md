@@ -1,5 +1,3 @@
-<image-card alt="Customer Feedback view" src="public/images/customer-feedback.png" ></image-card>
-
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -125,3 +123,6 @@ docker compose down
 # Rebuild after changes
 docker compose up --build
 ```
+
+## Sample Screenshots
+<img width="768" height="962" alt="Customer Feedback view" src="https://github.com/user-attachments/assets/e30948c7-53e5-40c9-b95f-c8ad485652b1" />

@@ -1,3 +1,5 @@
+<image-card alt="Customer Feedback view" src="public/images/customer-feedback.png" ></image-card>
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

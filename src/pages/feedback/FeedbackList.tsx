@@ -132,11 +132,13 @@ export default function FeedbackList() {
               />
             )}
 
+            {/* Page navigation */}
             {questionCategories.length > 1 && (
               <label className="category-pages">
                 {currentPage + 1} of {questionCategories.length}
               </label>
             )}
+
             <SubmitButton
               label={
                 currentPage + 1 === questionCategories.length

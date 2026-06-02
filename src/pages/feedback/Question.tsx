@@ -49,7 +49,7 @@ export default function Question({ question }: QuestionTypeProps) {
           name={question.question}
           label={question.question}
           description="Enter your answer"
-          value={feedbackAnswer?.value}
+          value={feedbackAnswer?.value ?? ""}
           disabled={feedbackForm.loading || feedbackForm.submitting}
           errors={feedbackAnswer?.errors}
           onChange={(value) => {

@@ -1,11 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useReducer, useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 
 import { type ChildrenProps } from "../types/PropTypes";
 import { type FeedbackFormType } from "../types/CommonTypes";
 import { validate, getMessage } from "../validators/Validator";
-import { postFeedback } from "../api/feedback";
 
 const initialValue: FeedbackFormType = {
   loading: false,
@@ -109,15 +107,7 @@ function feedbackReducer(feedbackForm: FeedbackFormType, action: ActionProps) {
       };
     }
     case "update-submit": {
-      console.log(feedbackForm);
-
-      /*
-      const { data, isLoading, error } = useQuery({
-        queryKey: ["categories"],
-        queryFn: () => postFeedback(customerSlug),
-      });
-      */
-
+      // console.log(feedbackForm);
       return {
         loading: feedbackForm.loading,
         submitting: action.value,

@@ -2,6 +2,8 @@ import { useState, useEffect, useEffectEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
+import { usePostFeedback } from "../../hooks/FeedbackHook";
+
 import SubmitButton from "../../components/common/SubmitButton";
 import { type QuestionCategoryType } from "../../types/CommonTypes";
 import {
@@ -22,6 +24,7 @@ export default function FeedbackList() {
 
   const feedbackForm = useFeedbackForm();
   const dispatch = useFeedbackDispatch();
+  const postFeedbackMutation = usePostFeedback();
 
   const loading = feedbackForm.loading;
 
@@ -38,11 +41,27 @@ export default function FeedbackList() {
     });
   }
 
-  function submitFeedback() {
+  const submitFeedback = async () => {
     dispatch({
       type: "update-submit",
       value: true,
     });
+
+    try {
+      const result = await postFeedbackMutation.mutateAsync({
+        customerSlug,
+        payload: feedbackForm.feedback,
+      });
+      console.log("result", result);
+      setCompleted(true);
+    } finally {
+      dispatch({
+        type: "update-submit",
+        value: false,
+      });
+    }
+
+    /*
     setTimeout(() => {
       setCompleted(true);
       dispatch({
@@ -50,7 +69,8 @@ export default function FeedbackList() {
         value: false,
       });
     }, 10000);
-  }
+    */
+  };
 
   function submitHandler() {
     dispatch({
@@ -97,6 +117,7 @@ export default function FeedbackList() {
 
   useEffect(() => {
     console.log("Start synchronization");
+
     dispatch({
       type: "update-loading",
       value: isLoading,

@@ -74,7 +74,10 @@ export default defineConfig([
 ])
 ```
 
-# Git Commands
+
+## Git Commands
+
+```bash
 git init
 git branch -M main
 git remote add origin https://github.com/dickmacalinao/customer-feedback-web.git
@@ -85,34 +88,24 @@ git add .
 git status
 git commit -m "comment"
 git push -u origin main
+```
 
 
-# Step-by-Step Fix (Clean Reinstall)
+## Step-by-Step Fix (Clean Reinstall)
+
+```bash
 # 1️⃣ Remove dependencies
 rm -rf node_modules
+
 # 2️⃣ Remove lock file
 rm -f package-lock.json
+
 # 3️⃣ Clear npm cache (important)
 npm cache clean --force
+
 # 4️⃣ Reinstall
 npm install
-
-# Production Docker Setup (Multi-Stage Build)
-# Build Docker Image
-docker build -t customer-feedback-web .
-# Run the Container
-docker run -p 3000:80 customer-feedback-web
-
-# Development Docker Setup (Hot Reload)
-# docker build -f Dockerfile.dev -t customer-feedback-web .
-# docker run -p 3000:3000 -v $(pwd):/app customer-feedback-web
-
-# Docker Compose (Professional Setup)
-docker-compose build --no-cache
-docker-compose up --build
-
-# docker build -t customer-feedback-web --build-arg VITE_API_URL=https://customer-feedback-web.com .
-# docker run -p 3000:80 customer-feedback-web
+```
 
 
 ## 🐳 Docker Commands

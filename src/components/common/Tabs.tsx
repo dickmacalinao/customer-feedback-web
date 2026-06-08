@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type Tab = {
   id: string;
@@ -25,10 +25,16 @@ const Tabs: React.FC<TabsProps> = ({
     }
   };
 
+  useEffect(() => {
+    setSelectedValue(selected);
+  }, [selected]);
+
   const listTabs = tabs.map((tab) => (
     <button
+      key={tab?.id}
       onClick={handleChange}
-      className={`px-6 py-3 rounded-lg font-medium transition-all ${
+      value={tab?.id}
+      className={`px-6 py-3 pr-10 rounded-lg font-medium transition-all ${
         selectedValue === tab?.id
           ? "bg-blue-600 text-white shadow-md"
           : "bg-white text-gray-700 hover:bg-gray-100"
@@ -38,12 +44,7 @@ const Tabs: React.FC<TabsProps> = ({
     </button>
   ));
 
-  return (
-    <>
-      {/* Tabs */}
-      <div className="flex justify-center mb-8 gap-4">{listTabs}</div>
-    </>
-  );
+  return <div className="flex justify-center mb-8 gap-4">{listTabs}</div>;
 };
 
 export default Tabs;

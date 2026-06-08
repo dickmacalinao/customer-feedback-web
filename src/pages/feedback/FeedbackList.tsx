@@ -60,16 +60,6 @@ export default function FeedbackList() {
         value: false,
       });
     }
-
-    /*
-    setTimeout(() => {
-      setCompleted(true);
-      dispatch({
-        type: "update-submit",
-        value: false,
-      });
-    }, 10000);
-    */
   };
 
   function submitHandler() {

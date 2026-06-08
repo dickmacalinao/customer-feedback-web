@@ -125,4 +125,8 @@ docker compose up --build
 ```
 
 ## Sample Screenshots
+Customer Feedback Page
 <img width="768" height="962" alt="Customer Feedback view" src="https://github.com/user-attachments/assets/e30948c7-53e5-40c9-b95f-c8ad485652b1" />
+
+Admin Report Page
+<img width="854" height="907" alt="Admin Report Page" src="https://github.com/user-attachments/assets/8ca6d29d-f99d-4f3c-88c1-8fd65514f09c" />

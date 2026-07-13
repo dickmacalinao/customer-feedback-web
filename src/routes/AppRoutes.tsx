@@ -6,6 +6,7 @@ import Reports from "../pages/admin/Reports";
 import Categories from "../pages/admin/Categories";
 import Category from "../pages/admin/Category";
 import Settings from "../pages/admin/Settings";
+import Sandbox from "../pages/admin/Sandbox";
 import NotFound from "../pages/NotFound";
 
 import AdminLayout from "../components/layout/AdminLayout";
@@ -26,6 +27,7 @@ export default function AppRoutes() {
         <Route path="/:customerSlug/categories" element={<Categories />} />
         <Route path="/:customerSlug/categories/:id" element={<Category />} />
         <Route path="/:customerSlug/settings" element={<Settings />} />
+        <Route path="/:customerSlug/sandbox" element={<Sandbox />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import Tabs from "../../components/common/Tabs";
 import { fetchCategories } from "../../api/categories";
-import CategoryReport from "./Reports/CategoryReport";
+import CategoryReport from "./reports/CategoryReport";
 
 export default function Reports() {
   const [categoryTabs, setCategoryTabs] = useState([]);

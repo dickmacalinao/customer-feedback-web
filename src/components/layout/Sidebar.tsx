@@ -53,6 +53,12 @@ export default function Sidebar() {
               {!collapsed && " Settings"}
             </NavLink>
           </li>
+          <li>
+            <NavLink to={`/${customerSlug}/sandbox`}>
+              <FaCog />
+              {!collapsed && " Sandbox"}
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </div>
